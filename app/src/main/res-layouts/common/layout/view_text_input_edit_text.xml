@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="date"
+            type="java.util.Date" />
+
+        <variable
+            name="digits"
+            type="String" />
+        <variable
+            name="customPaddingEnd"
+            type="int" />
+
+        <variable
+            name="disable"
+            type="boolean" />
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="drawable"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="inputType"
+            type="com.artisan.un.utils.TextInputType" />
+    </data>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/EditTextTheme"
+        app:boxStrokeColor="@color/input_border_color"
+        app:hintTextColor="@color/text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:setHint="@{ hint }">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:enabled="@{ !disable }"
+            android:gravity="top|start"
+            android:maxLines="1"
+            app:digits="@{digits}"
+            app:setDate="@={ date }"
+            android:paddingStart="16dp"
+            android:scrollHorizontally="true"
+            android:text="@={ text }"
+            android:textColor="@color/darkGray"
+            app:customPaddingEnd="@{ customPaddingEnd }"
+            app:setDrawableEnd="@{ drawable }"
+            app:setInputType="@{ inputType }"
+            tools:ignore="RtlSymmetry" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</layout>

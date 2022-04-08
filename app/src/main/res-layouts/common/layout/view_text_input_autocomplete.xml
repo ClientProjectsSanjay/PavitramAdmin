@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="menu"
+            type="java.util.ArrayList&lt;String&gt;" />
+
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="drawable"
+            type="android.graphics.drawable.Drawable" />
+    </data>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/EditTextTheme"
+        app:boxStrokeColor="@color/input_border_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:setHint="@{ hint }">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@={ text }"
+            android:textColor="@color/darkGray"
+            app:dropDownMenu="@{ menu }"
+            app:setDrawableEnd="@{ drawable }"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+</layout>

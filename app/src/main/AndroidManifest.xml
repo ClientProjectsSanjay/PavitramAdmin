@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.artisan.un">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UN"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_key" />
+
+        <activity
+            android:name=".ui.splashscreen.ActivitySplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.home.myOrder.ActivityMyOrder"/>
+
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.home.myOrder.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.common.ActivityWebView"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.common.ActivityGoogleMap"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivitySelectLanguage"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityChangePassword"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityRegister"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityLogin"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityDocumentsUpload"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityEnterMobile"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityOtpVerification"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.userauth.ActivityResetPassword"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.AddProductBasicActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.AddProductSpecsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.AddProductDescActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.home.NotificationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.home.EditProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.home.EditAddressActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.ProductDescriptionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.SubCategoryActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.product.ActivitySearchProduct"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/app_logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/brown" />
+
+        <service
+            android:name=".utils.firebase.FireBaseMessage"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+
+        </provider>
+
+    </application>
+
+</manifest>

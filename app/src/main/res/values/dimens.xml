@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text_size">20sp</dimen>
+    <dimen name="appbar_title_text_size">18sp</dimen>
+    <dimen name="sub_title_text_size">16sp</dimen>
+    <dimen name="heading_text_size">14sp</dimen>
+    <dimen name="sub_heading_text_size">12sp</dimen>
+    <dimen name="input_height">52dp</dimen>
+    <dimen name="search_height">44dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_0">0dp</dimen>
+
+    <dimen name="otp_view_item_size">35dp</dimen>
+    <dimen name="otp_view_item_spacing">45dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+</resources>

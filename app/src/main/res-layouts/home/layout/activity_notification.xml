@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="viewModel"
+            type="com.artisan.un.baseClasses.BaseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:background="@color/toll_bar_color"
+            app:hideNotification="@{ true }"
+            app:listener="@{ appBarListener }"
+            app:showBack="@{ true }"
+            app:title="@{ @string/notification }" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{ isLoading ? View.VISIBLE : View.GONE, default=gone }" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@{ message }"
+                android:textColor="@color/darkGray"
+                android:textSize="14sp"
+                android:visibility="@{ message != null ? View.VISIBLE : View.GONE, default=gone }" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

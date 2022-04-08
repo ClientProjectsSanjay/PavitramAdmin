@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <import type="com.artisan.un.utils.TextInputType" />
+        <variable
+            name="title"
+            type="String" />
+        <variable
+            name="showCheckBox"
+            type="boolean" />
+        <variable
+            name="model"
+            type="com.artisan.un.apiModel.AddressModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:id="@+id/heading_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_location_on"
+                app:layout_constraintBottom_toBottomOf="@id/title_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_txt"
+                app:tint="@color/brown"
+                tools:ignore="ContentDescription" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/title_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{ title }"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/title_text_size"
+                app:font_name="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/heading_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/header_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/input_border_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_txt" />
+
+            <CheckBox
+                android:id="@+id/check_box"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:paddingStart="16dp"
+                android:layout_marginTop="8dp"
+                android:button="@drawable/selector_check_box_white_base"
+                android:textColor="@color/text_color"
+                android:visibility="@{ showCheckBox ? View.VISIBLE : View.GONE, default = gone }"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:text="@string/office_address_same_as_registered"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_divider"
+                app:useMaterialThemeColors="false"
+                tools:visibility="visible"
+                tools:ignore="RtlSymmetry" />
+
+            <include
+                android:id="@+id/input_address_one"
+                layout="@layout/view_text_input_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:hint="@{ @string/address_line_one }"
+                app:inputType="@{ TextInputType.TEXT }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/check_box"
+                app:text="@={ model.addressLineOne }" />
+
+            <include
+                android:id="@+id/input_address_two"
+                layout="@layout/view_text_input_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:hint="@{ @string/address_line_two }"
+                app:inputType="@{ TextInputType.TEXT }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_address_one"
+                app:text="@={ model.addressLineTwo }" />
+
+            <include
+                android:id="@+id/input_country"
+                layout="@layout/view_text_input_autocomplete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:drawable="@{ @drawable/ic_baseline_keyboard_arrow_down }"
+                app:hint="@{ @string/country }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_address_two"
+                app:menu="@{model.countries}"
+                app:text="@={ model.country }" />
+
+
+            <include
+                android:id="@+id/input_state"
+                layout="@layout/view_text_input_autocomplete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:drawable="@{ @drawable/ic_baseline_keyboard_arrow_down }"
+                app:hint="@{ @string/state }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_country"
+                app:menu="@{model.states}"
+                app:text="@={ model.state }" />
+
+            <include
+                android:id="@+id/input_city"
+                layout="@layout/view_text_input_autocomplete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:drawable="@{ @drawable/ic_baseline_keyboard_arrow_down }"
+                app:hint="@{ @string/city }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_state"
+                app:menu="@{model.cities}"
+                app:text="@={ model.city }" />
+
+            <include
+                android:id="@+id/input_pin"
+                layout="@layout/view_text_input_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="@{ checkBox.checked ? View.GONE : View.VISIBLE }"
+                app:hint="@{ @string/pin }"
+                app:inputType="@{ TextInputType.NUMBER }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_city"
+                app:text="@={ model.pin }" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

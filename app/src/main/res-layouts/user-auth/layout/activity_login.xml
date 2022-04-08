@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginModel"
+            type="com.artisan.un.apiModel.LoginModel" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.LoginListener" />
+
+        <variable
+            name="model"
+            type="com.artisan.un.ui.userauth.viewModel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/app_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/login_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/extra_bold"
+            android:includeFontPadding="false"
+            android:text="@string/login"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/title_text_size"
+            app:font_name="extra_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_email_mobile"
+            style="@style/ThemeInputTextLayout"
+            android:layout_width="0dp"
+            android:layout_marginTop="39dp"
+            android:hint="@string/email_mobile_no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_txt">
+
+            <com.artisan.un.utils.customView.CustomEditText
+                style="@style/ThemeEditText"
+                android:layout_width="match_parent"
+                android:digits="@string/digits_email"
+                android:drawableEnd="@drawable/ic_round_mail_outline"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:text="@={loginModel.phoneOrEmail}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_password"
+            style="@style/ThemeInputTextLayout"
+            android:layout_width="0dp"
+            android:hint="@string/password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_email_mobile"
+            app:passwordToggleDrawable="@drawable/selector_password_eye"
+            app:passwordToggleEnabled="true">
+
+            <com.artisan.un.utils.customView.CustomEditText
+                style="@style/ThemeEditText"
+                android:layout_width="match_parent"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:text="@={loginModel.password}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/extra_bold"
+            android:onClick="@{() -> listener.forgotPasswordClick()}"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/forgot_password_"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/sub_title_text_size"
+            app:font_name="extra_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_password" />
+
+        <com.artisan.un.utils.customView.CustomButton
+            android:id="@+id/login_btn"
+            style="@style/ThemeButtonFill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:onClick="@{() -> listener.login(loginModel)}"
+            android:text="@string/login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/dont_have_ac_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/light"
+            android:text="@string/don_t_have_an_account"
+            android:textColor="@color/text_color"
+            android:textSize="13sp"
+            app:font_name="light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/click_register_txt"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/click_register_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/light"
+            android:onClick="@{() -> listener.registerNowClick()}"
+            android:text="@string/click_to_register"
+            android:textColor="@color/orange"
+            android:textSize="13sp"
+            app:font_name="light"
+            app:layout_constraintBottom_toBottomOf="@id/dont_have_ac_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dont_have_ac_txt"
+            app:layout_constraintTop_toTopOf="@id/dont_have_ac_txt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

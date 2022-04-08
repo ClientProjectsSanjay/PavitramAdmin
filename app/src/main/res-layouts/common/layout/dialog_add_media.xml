@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.AddMediaListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/message_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:text="@string/how_to_add_photo"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sub_title_text_size"
+                app:fontFamily="@font/light"
+                app:font_name="light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/secondary_btn"
+                style="@style/ThemeButtonFlat"
+                android:layout_width="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> listener.onGalleryClick()}"
+                android:text="@string/gallery"
+                app:layout_constraintEnd_toStartOf="@id/primary_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/message_txt" />
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/primary_btn"
+                style="@style/ThemeButtonFlat"
+                android:layout_width="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> listener.onCameraClick()}"
+                android:text="@string/camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/secondary_btn"
+                app:layout_constraintTop_toBottomOf="@id/message_txt" />
+
+            <LinearLayout
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/primary_btn">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/warmGray" />
+
+                <com.artisan.un.utils.customView.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/or"
+                    android:textColor="@color/warmGray"
+                    android:textSize="@dimen/sub_title_text_size"
+                    app:fontFamily="@font/light" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/warmGray" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_url_container"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint="@string/youtube_url"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator">
+
+                <EditText
+                    android:id="@+id/input_url"
+                    style="@style/ThemeEditText"
+                    android:layout_width="match_parent"
+                    android:inputType="textUri"
+                    tools:ignore="Autofill,LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/save_btn"
+                style="@style/ThemeButtonFill"
+                android:layout_width="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:onClick="@{() -> listener.onSaveClick()}"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_url_container" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

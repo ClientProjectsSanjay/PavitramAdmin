@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.artisan.un.utils.TextInputType" />
+
+        <variable
+            name="address"
+            type="com.artisan.un.utils.apis.UserAddress" />
+
+        <variable
+            name="viewModel"
+            type="com.artisan.un.ui.home.viewModel.EditAddressViewModel" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.EditAddressListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:background="@color/toll_bar_color"
+            app:hideNotification="@{ true }"
+            app:listener="@{ appBarListener }"
+            app:showBack="@{ true }"
+            app:title="@{ @string/edit_address }" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/address_line_one">
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        android:id="@+id/input_address_one"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:text="@={ address.address_line_one }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/country">
+
+                    <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                        android:id="@+id/input_country"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                        android:focusable="false"
+                        android:text="@string/india" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/state">
+
+                    <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                        android:id="@+id/input_state"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                        android:focusable="false"
+                        android:text="@string/karnataka" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/city">
+
+                    <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                        android:id="@+id/input_city"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                        android:focusable="false"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:text="@={ address.district }"
+                        app:dropDownMenu="@{ viewModel.cityNameList }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/taluk">
+
+                    <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                        android:id="@+id/input_tahsil"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                        android:focusable="false"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:text="@={ address.tehsil }"
+                        app:dropDownMenu="@{ viewModel.tehsilNameList }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="16dp"
+                    android:hint="@string/pin">
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        android:id="@+id/input_pin"
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:text="@={ address.pincode }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.artisan.un.utils.customView.CustomButton
+            style="@style/ThemeButtonFill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{() -> listener.onSaveChangesClick(address)}"
+            android:text="@string/save_changes" />
+
+    </LinearLayout>
+</layout>

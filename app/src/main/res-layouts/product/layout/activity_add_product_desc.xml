@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isEditable"
+            type="boolean" />
+
+        <variable
+            name="isToEditProduct"
+            type="boolean" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.ProductListener" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="bundle"
+            type="com.artisan.un.apiModel.ProductBundle" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/app_bar"
+                layout="@layout/view_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:background="@color/toll_bar_color"
+                app:listener="@{ appBarListener }"
+                app:showBack="@{ true }"
+                app:showEdit="@{ true }"
+                app:title="@{ @string/product_add }" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.artisan.un.utils.customView.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english"
+                        android:textColor="@color/brown"
+                        android:textSize="@dimen/sub_title_text_size"
+                        app:font_name="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/input_border_color" />
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@{ isEditable ? @drawable/outline_orange_corner_round_8 : null }"
+                        android:enabled="@{ isEditable }"
+                        android:maxLength="1000"
+                        android:padding="@{ isEditable ? @dimen/padding_12 : @dimen/padding_0 }"
+                        android:text="@={ bundle.descriptionEn }"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/sub_title_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/max_1000_characters"
+                        android:textColor="@color/warmGray"
+                        android:textSize="12sp"
+                        android:visibility="@{ isEditable? View.VISIBLE : View.GONE, default=gone }" />
+
+                    <com.artisan.un.utils.customView.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/kannada"
+                        android:textColor="@color/brown"
+                        android:textSize="@dimen/sub_title_text_size"
+                        app:font_name="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/input_border_color" />
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@{ isEditable ? @drawable/outline_orange_corner_round_8 : null }"
+                        android:enabled="@{ isEditable }"
+                        android:maxLength="1000"
+                        android:padding="@{ isEditable ? @dimen/padding_12 : @dimen/padding_0 }"
+                        android:text="@={ bundle.descriptionKn }"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/sub_title_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/max_1000_characters"
+                        android:textColor="@color/warmGray"
+                        android:textSize="12sp"
+                        android:visibility="@{ isEditable? View.VISIBLE : View.GONE, default=gone }" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/add_btn"
+                style="@style/ThemeButtonFill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:onClick="@{() -> listener.onContinueClick()}"
+                android:text="@{ isToEditProduct ? @string/save : @string/add }" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

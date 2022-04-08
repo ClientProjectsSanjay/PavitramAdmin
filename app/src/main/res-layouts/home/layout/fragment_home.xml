@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.HomePageListener" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.artisan.un.baseClasses.BaseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_solid_round_8_dp_white"
+                android:drawablePadding="12dp"
+                android:includeFontPadding="false"
+                android:onClick="@{() -> listener.onSearchClick()}"
+                android:padding="12dp"
+                android:text="@string/search_product"
+                android:textColor="@color/input_border_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_search"
+                app:drawableTint="@color/brown"
+                app:font_name="semi_bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@color/page_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingBottom="120dp" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <TextView
+                android:visibility="@{ message != null ? View.VISIBLE : View.GONE, default=gone }"
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="@{ message }" />
+
+            <ProgressBar
+                android:visibility="@{ isLoading ? View.VISIBLE : View.GONE, default=gone }"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

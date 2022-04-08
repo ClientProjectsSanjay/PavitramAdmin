@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="image"
+            type="String" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="draftInfo"
+            type="com.artisan.un.utils.apis.DraftInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{ draftInfo != null ? View.VISIBLE : View.GONE, default=gone }"
+            tools:visibility="visible">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/parent_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/product_img"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="w, 1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadImage="@{image}"
+                        tools:ignore="ContentDescription" />
+
+                    <com.artisan.un.utils.customView.CustomTextView
+                        android:id="@+id/product_name_txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center|top"
+                        android:maxLines="2"
+                        android:paddingStart="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="4dp"
+                        android:text="@{ draftInfo.localname_en }"
+                        android:textColor="@color/darkGray"
+                        app:layout_constraintEnd_toEndOf="@id/product_img"
+                        app:layout_constraintStart_toStartOf="@id/product_img"
+                        app:layout_constraintTop_toBottomOf="@id/product_img"
+                        tools:text="eCraftIndia Maroon lord shiva" />
+
+                    <com.artisan.un.utils.customView.CustomTextView
+                        android:id="@+id/price_txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text='@{"₹"+draftInfo.price}'
+                        android:textColor="@color/darkGray"
+                        app:font_name="bold"
+                        app:layout_constraintEnd_toEndOf="@id/product_name_txt"
+                        app:layout_constraintStart_toStartOf="@id/product_name_txt"
+                        app:layout_constraintTop_toBottomOf="@id/product_name_txt"
+                        tools:text="₹50000" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/action_remove"
+                style="@style/ThemeButtonFlat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/action_edit"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/action_edit"
+                style="@style/ThemeButtonFill"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/action_remove" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:visibility="@{ message != null ? View.VISIBLE : View.GONE, default=gone }"
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@{ message }" />
+
+        <ProgressBar
+            android:visibility="@{ isLoading ? View.VISIBLE : View.GONE, default=gone }"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+</layout>

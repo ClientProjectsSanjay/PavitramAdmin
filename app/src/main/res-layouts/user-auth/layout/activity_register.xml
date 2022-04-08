@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.artisan.un.utils.TextInputType" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.RegisterListener" />
+
+        <variable
+            name="authModel"
+            type="com.artisan.un.apiModel.AuthModel" />
+
+        <variable
+            name="userTypes"
+            type="java.util.ArrayList&lt;String&gt;" />
+
+        <variable
+            name="model"
+            type="com.artisan.un.ui.userauth.viewModel.RegisterViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:src="@drawable/app_logo"
+                android:layout_width="140dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="80dp"
+                android:layout_height="wrap_content"
+                tools:ignore="ContentDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/register_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/extra_bold"
+                android:includeFontPadding="false"
+                android:text="@string/register"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/title_text_size"
+                app:font_name="extra_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_name"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/register_txt">
+
+                <com.artisan.un.utils.customView.CustomEditText
+                    style="@style/ThemeEditText"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:digits="@string/digits_name"
+                    android:drawableEnd="@drawable/ic_round_person_outline"
+                    android:inputType="text"
+                    android:text="@={authModel.name}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_email"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:hint="@string/email_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_name">
+
+                <com.artisan.un.utils.customView.CustomEditText
+                    style="@style/ThemeEditText"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:digits="@string/digits_email"
+                    android:drawableEnd="@drawable/ic_round_mail_outline"
+                    android:inputType="textEmailAddress"
+                    android:text="@={authModel.emailId}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_mobile_no"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:hint="@string/mobile_no"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_email">
+
+                <com.artisan.un.utils.customView.CustomEditText
+                    style="@style/ThemeEditText"
+                    android:paddingEnd="18dp"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:layout_width="match_parent"
+                    android:digits="@string/digits_mobile"
+                    android:drawableEnd="@drawable/ic_round_smartphone"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="@={authModel.mobileNo}"
+                    tools:ignore="RtlSymmetry" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_password"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:hint="@string/password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_mobile_no">
+
+                <com.artisan.un.utils.customView.CustomEditText
+                    style="@style/ThemeEditText"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:layout_width="match_parent"
+                    android:inputType="textPassword"
+                    android:text="@={authModel.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_confirm_password"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:hint="@string/confirm_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_password"
+                app:passwordToggleDrawable="@drawable/selector_password_eye"
+                app:passwordToggleEnabled="true">
+
+                <com.artisan.un.utils.customView.CustomEditText
+                    style="@style/ThemeEditText"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    android:layout_width="match_parent"
+                    android:inputType="textPassword"
+                    android:text="@={authModel.confirmPassword}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_user_type"
+                style="@style/ThemeInputTextLayout"
+                android:layout_width="0dp"
+                android:hint="@string/select_your_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_confirm_password">
+
+                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                    style="@style/ThemeEditText"
+                    android:maxLines="1"
+                    android:paddingEnd="18dp"
+                    android:cursorVisible="false"
+                    android:layout_width="match_parent"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                    android:focusable="false"
+                    android:text="@={ authModel.userType }"
+                    app:dropDownMenu="@{userTypes}"
+                    tools:ignore="RtlSymmetry" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/promotional_email_check"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:button="@drawable/selector_check_box"
+                android:textColor="@color/text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_user_type"
+                app:useMaterialThemeColors="false" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/tv_agree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/light"
+                android:text="@string/promotional_email_agreement"
+                android:textSize="14sp"
+                app:font_name="light"
+                app:layout_constraintBottom_toBottomOf="@+id/promotional_email_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/promotional_email_check"
+                app:layout_constraintTop_toTopOf="@+id/promotional_email_check" />
+
+            <CheckBox
+                android:id="@+id/terms_and_privacy_policy_check"
+                android:layout_width="26dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="10dp"
+                android:button="@drawable/selector_check_box"
+                android:textColor="@color/text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/promotional_email_check"
+                app:useMaterialThemeColors="false" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/tv_policy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/light"
+                android:text="@string/terms_and_privacy_policy"
+                android:textSize="14sp"
+                app:enableTermsAndConditionText="@{true}"
+                app:font_name="light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/terms_and_privacy_policy_check"
+                app:layout_constraintTop_toTopOf="@+id/terms_and_privacy_policy_check" />
+
+            <com.artisan.un.utils.customView.CustomButton
+                android:id="@+id/sign_up_btn"
+                style="@style/ThemeButtonFill"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{(view) -> listener.onSignUpClick(promotionalEmailCheck, termsAndPrivacyPolicyCheck, authModel)}"
+                android:text="@string/sign_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/terms_and_privacy_policy_check" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/already_have_ac_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/light"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                app:font_name="light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sign_in_txt"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sign_up_btn" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/sign_in_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/light"
+                android:onClick="@{() -> listener.onLoginClick()}"
+                android:text="@string/click_to_login"
+                android:textColor="@color/orange"
+                android:textSize="14sp"
+                app:font_name="light"
+                app:layout_constraintBottom_toBottomOf="@id/already_have_ac_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/already_have_ac_txt"
+                app:layout_constraintTop_toTopOf="@id/already_have_ac_txt" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

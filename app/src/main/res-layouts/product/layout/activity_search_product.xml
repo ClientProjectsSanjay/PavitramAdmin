@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_screen_bg"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hideNotification="@{ true }"
+            app:listener="@{ appBarListener }"
+            app:showBack="@{ true }"
+            app:title="@{ @string/search_product }" />
+
+        <EditText
+            android:id="@+id/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_solid_round_8_dp_white"
+            android:drawablePadding="12dp"
+            android:gravity="center_vertical"
+            android:hint="@string/search_product"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:singleLine="true"
+            android:textColor="@color/darkGray"
+            android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_baseline_search"
+            app:drawableTint="@color/brown"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="@color/white">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/page_bg_color"
+                android:clipToPadding="false"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{ message }"
+                android:visibility="@{ message == null ? View.GONE : View.VISIBLE, default=gone }" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{ isLoading ? View.VISIBLE : View.GONE, default=gone }" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

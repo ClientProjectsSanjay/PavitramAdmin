@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.artisan.un.utils.AppLanguage" />
+
+        <variable
+            name="selectedLanguage"
+            type="AppLanguage" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.LanguageSelectionListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:src="@drawable/app_logo"
+            android:layout_width="140dp"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/choose_language_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_language"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/title_text_size"
+            app:font_name="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/please_select_lang_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/please_select_preferred_language"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/sub_title_text_size"
+            app:font_name="medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/choose_language_txt" />
+
+        <include
+            android:id="@+id/lang_english_btn"
+            layout="@layout/view_language_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="@{() -> listener.selectLanguage(AppLanguage.ENGLISH)}"
+            app:isSelected="@{ selectedLanguage == AppLanguage.ENGLISH }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/please_select_lang_txt"
+            app:title="@{ @string/lang_english }" />
+
+        <include
+            android:id="@+id/lang_kannada_btn"
+            layout="@layout/view_language_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> listener.selectLanguage(AppLanguage.KANNADA)}"
+            app:isSelected="@{ selectedLanguage == AppLanguage.KANNADA }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lang_english_btn"
+            app:title="@{ @string/lang_kannada }" />
+
+        <include
+            layout="@layout/view_action_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{() -> listener.onProceedClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{ @string/proceed }" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

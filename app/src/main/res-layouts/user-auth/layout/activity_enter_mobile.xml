@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.artisan.un.utils.TextInputType" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="actionTitle"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.ForgotPasswordListener" />
+
+        <variable
+            name="model"
+            type="com.artisan.un.ui.userauth.viewModel.ForgotPasswordViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <ImageView
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="24dp"
+            android:onClick="@{() -> listener.onBackClick()}"
+            android:padding="16dp"
+            android:src="@drawable/ic_baseline_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/brown"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:src="@drawable/app_logo"
+            android:layout_width="140dp"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ title }"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/title_text_size"
+            app:font_name="extra_bold"
+            android:fontFamily="@font/extra_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+        <com.artisan.un.utils.customView.CustomTextView
+            android:id="@+id/description_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@{ message }"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/sub_title_text_size"
+            app:font_name="semi_bold"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forgot_password" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_mobile_no"
+            style="@style/ThemeInputTextLayout"
+            android:layout_width="0dp"
+            android:layout_marginTop="39dp"
+            android:hint="@string/mobile_no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_txt">
+
+            <com.artisan.un.utils.customView.CustomEditText
+                style="@style/ThemeEditText"
+                android:layout_width="match_parent"
+                android:digits="@string/digits_mobile"
+                android:paddingEnd="18dp"
+                android:drawableEnd="@drawable/ic_round_smartphone"
+                android:inputType="number"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:imeOptions="actionDone"
+                android:text="@={ model.mobile }"
+                tools:ignore="RtlSymmetry" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.artisan.un.utils.customView.CustomButton
+            android:id="@+id/reset_now_btn"
+            style="@style/ThemeButtonFill"
+            android:layout_width="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{() -> listener.onResetNowClick(model.mobile)}"
+            android:text="@{ actionTitle }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_mobile_no" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

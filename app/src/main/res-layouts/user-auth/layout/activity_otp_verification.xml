@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mobileNumber"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.OtpListener" />
+
+        <variable
+            name="model"
+            type="com.artisan.un.ui.userauth.viewModel.OTPViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:layout_width="?actionBarSize"
+                android:layout_height="?actionBarSize"
+                android:layout_marginTop="24dp"
+                android:onClick="@{() -> listener.onBackClick()}"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_arrow_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/brown"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:src="@drawable/app_logo"
+                android:layout_width="140dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="80dp"
+                android:layout_height="wrap_content"
+                tools:ignore="ContentDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_otp"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/title_text_size"
+                app:font_name="extra_bold"
+                android:fontFamily="@font/extra_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/sub_title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@{ @string/enter_4_digit_otp_sent_to + ` ` + mobileNumber}"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sub_title_text_size"
+                app:font_name="semi_bold"
+                android:fontFamily="@font/semi_bold"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_txt" />
+
+            <com.artisan.un.utils.customView.OtpView
+                android:id="@+id/pin_view"
+                app:layout_constraintTop_toBottomOf="@id/sub_title_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@null"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:inputType="number"
+                android:itemBackground="@color/page_bg_color"
+                app:itemCount="4"
+                app:itemHeight="50dp"
+                app:itemRadius="4dp"
+                app:itemSpacing="24dp"
+                app:itemWidth="45dp"
+                app:lineColor="@color/input_border_color"
+                app:viewType="rectangle" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:id="@+id/timer_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/remaining_30_sec"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sub_title_text_size"
+                app:font_name="semi_bold"
+                android:fontFamily="@font/semi_bold"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pin_view" />
+
+            <include
+                android:id="@+id/verify_btn"
+                layout="@layout/view_action_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{() -> listener.onVerifyClick()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/timer_txt"
+                app:title="@{ @string/verify }" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

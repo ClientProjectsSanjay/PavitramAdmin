@@ -1,0 +1,1178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.DocumentVerificationListener" />
+
+        <variable
+            name="model"
+            type="com.artisan.un.ui.userauth.viewModel.DocumentUploadViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/page_bg_color">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/app_logo"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/app_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <com.artisan.un.utils.customView.CustomTextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/extra_bold"
+                    android:text="@string/document"
+                    android:textColor="@color/brown"
+                    android:textSize="@dimen/title_text_size"
+                    app:font_name="extra_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_logo" />
+
+                <com.artisan.un.utils.customView.CustomTextView
+                    android:id="@+id/description_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:fontFamily="@font/semi_bold"
+                    android:gravity="center"
+                    android:text="@string/please_enter_following_details"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/sub_title_text_size"
+                    app:font_name="semi_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/forgot_password" />
+
+                <LinearLayout
+                    android:id="@+id/views"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_txt">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_user_type_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_id_card"
+                                    app:tint="@color/brown"
+                                    tools:ignore="ContentDescription" />
+
+                                <com.artisan.un.utils.customView.CustomTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:fontFamily="@font/semi_bold"
+                                    android:text="@string/user_type"
+                                    android:textColor="@color/brown"
+                                    android:textSize="18sp"
+                                    app:font_name="semi_bold" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color" />
+
+                            <RadioGroup
+                                android:id="@+id/radio_group_user_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radio_artisan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/artisan" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_shg"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/shg" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_is_sanjeevini_shg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="@{radioShg.checked?View.VISIBLE:View.GONE, default=gone}"
+                        app:cardCornerRadius="8dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/user_img"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_id_card"
+                                app:layout_constraintBottom_toBottomOf="@id/sanjeevini_shg_txt"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/sanjeevini_shg_txt"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/sanjeevini_shg_txt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/semi_bold"
+                                android:text="@string/shg_details"
+                                android:textColor="@color/brown"
+                                android:textSize="18sp"
+                                app:font_name="semi_bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/user_img"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <View
+                                android:id="@+id/header_divider_4"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/sanjeevini_shg_txt" />
+
+                            <TextView
+                                android:id="@+id/are_you_sanjeevini_shg_txt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:includeFontPadding="false"
+                                android:text="@string/are_you_a_sanjeevini_shg"
+                                android:textColor="@color/darkGray"
+                                android:textSize="16sp"
+                                app:fontFamily="@font/medium"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider_4" />
+
+                            <RadioGroup
+                                android:id="@+id/sanjeevini_shg"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/are_you_sanjeevini_shg_txt">
+
+                                <RadioButton
+                                    android:id="@+id/sanjeevini_shg_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/sanjeevini_shg_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_shg_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="18dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/shg_name_required"
+                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/sanjeevini_shg">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etSHGName"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_shg_gplf"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/shg_gplf_required"
+                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_shg_name">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etSHGGPLGNumber"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_shg_mis_code"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/shg_mis_code"
+                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_shg_gplf">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etMISCodeNumber"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_aadhar_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/heading_img"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_id_card"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/title_txt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/semi_bold"
+                                android:text="@string/aadhar_card"
+                                android:textColor="@color/brown"
+                                android:textSize="18sp"
+                                app:font_name="semi_bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/heading_img"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <View
+                                android:id="@+id/header_divider"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title_txt" />
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_aadhar_number"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/aadhar_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etAadharNumber"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_aadhar"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="12"
+                                    android:singleLine="true"
+                                    android:text="@={model.aadharNumber}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_aadhar_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_aadhar"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_aadhar_number">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName"
+                                    android:singleLine="true"
+                                    android:text="@={model.aadharName}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_aadhar_dob"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/dob_as_per_aadhar"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_aadhar_name">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etAadharDob"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:focusable="false"
+                                    android:inputType="date"
+                                    android:onClick="@{(v)->listener.doPickAADHARDOB()}"
+                                    android:text="@={model.aadharDOB}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <include
+                                android:id="@+id/front_image"
+                                layout="@layout/view_upload_file_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:onClick="@{() -> listener.doPickAADHARFront()}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_aadhar_dob"
+                                app:title="@{ model.aadharImageFront==null? @string/aadhar_image_front: model.aadharImageFrontName }" />
+
+                            <include
+                                android:id="@+id/back_image"
+                                layout="@layout/view_upload_file_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:onClick="@{() -> listener.doPickAADHARBack()}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/front_image"
+                                app:title="@{ model.aadharImageBack==null?@string/aadhar_image_back:model.aadharImageBackName }" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/bank_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/heading_img_20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_id_card"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt_20"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt_20"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/title_txt_20"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/bank"
+                                android:textColor="@color/brown"
+                                android:textSize="@dimen/title_text_size"
+                                app:font_name="bold"
+                                app:layout_constraintEnd_toStartOf="@id/reset_bank_field"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/heading_img_20"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/reset_bank_field"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:height="@dimen/input_height"
+                                android:gravity="center"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:text="@string/reset"
+                                android:textColor="@color/orange"
+                                android:textSize="@dimen/sub_title_text_size"
+                                android:visibility="gone"
+                                app:font_name="bold"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt_20"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt_20" />
+
+                            <View
+                                android:id="@+id/header_divider_20"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title_txt_20" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/account_holder_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/bank_account_name"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider_20">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_account_holder_name"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_pan"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:maxLength="10"
+                                    android:singleLine="true"
+                                    android:text="@={ model.bankName }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/ifsc_code"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/bank_account_ifsc_code"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/account_holder_name">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_ifsc_code"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName"
+                                    android:singleLine="true"
+                                    android:text="@={model.bankISFC}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/fssi_code"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/bank_account_ffcc"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/ifsc_code">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_fssi_code"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName"
+                                    android:text="@={model.bankFCC}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/bank_account_number"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/bank_account_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fssi_code">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_bank_account_number"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:text="@={model.bankNumber}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/gst_number"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/bank_account_gst"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/bank_account_number">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_gst_number"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName"
+                                    android:text="@={model.bankGst}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_pan_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/heading_img_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_id_card"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt_1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt_1"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/title_txt_1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/pan_card"
+                                android:textColor="@color/brown"
+                                android:textSize="@dimen/title_text_size"
+                                app:font_name="bold"
+                                app:layout_constraintEnd_toStartOf="@id/reset_pan"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/heading_img_1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/reset_pan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:height="@dimen/input_height"
+                                android:gravity="center"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:text="@string/reset"
+                                android:textColor="@color/orange"
+                                android:textSize="@dimen/sub_title_text_size"
+                                android:visibility="gone"
+                                app:font_name="bold"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt_1" />
+
+                            <View
+                                android:id="@+id/header_divider_2"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title_txt_1" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_pan_number"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/pan_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider_2">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/input_pan"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_pan"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:maxLength="10"
+                                    android:singleLine="true"
+                                    android:text="@={ model.panNumber }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_pan_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_pan"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_pan_number">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName"
+                                    android:singleLine="true"
+                                    android:text="@={model.panName}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_pan_dob"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/dob_as_per_pan"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_pan_name">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    android:id="@+id/etPanDob"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:focusable="false"
+                                    android:inputType="date"
+                                    android:onClick="@{(v)->listener.doPickPANBOB()}"
+                                    android:text="@={model.panDOB}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <include
+                                layout="@layout/view_upload_file_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:onClick="@{() -> listener.doPickPAN()}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_pan_dob"
+                                app:title="@{ model.panImage==null || model.panImage.empty ? @string/pan_image:model.panImageName}" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_brn_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/heading_img_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_id_card"
+                                app:layout_constraintBottom_toBottomOf="@id/title_txt_2"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/title_txt_2"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/title_txt_2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/semi_bold"
+                                android:text="@string/brn"
+                                android:textColor="@color/brown"
+                                android:textSize="@dimen/title_text_size"
+                                app:font_name="semi_bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/heading_img_2"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <View
+                                android:id="@+id/header_divider_3"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title_txt_2" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_brn_number"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/brn_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider_3">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_mobile"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="16"
+                                    android:singleLine="true"
+                                    android:text="@={model.brnNumber}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_brn_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_barn_brn"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_brn_number">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:digits="@string/digits_name"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="text"
+                                    android:singleLine="true"
+                                    android:text="@={model.brnName}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <include
+                                layout="@layout/view_upload_file_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:onClick="@{() -> listener.doPickBRN()}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_brn_name"
+                                app:title="@{ model.brnImage==null?@string/brn_image:model.brnImageName }" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_address_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp">
+
+                            <ImageView
+                                android:id="@+id/iv_address_register"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location_on"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_title_address_register"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_title_address_register"
+                                app:tint="@color/brown"
+                                tools:ignore="ContentDescription" />
+
+                            <com.artisan.un.utils.customView.CustomTextView
+                                android:id="@+id/tv_title_address_register"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/registered_address"
+                                android:textColor="@color/brown"
+                                android:textSize="@dimen/title_text_size"
+                                app:font_name="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toEndOf="@id/iv_address_register"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <View
+                                android:id="@+id/header_divider_0"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@color/input_border_color"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_title_address_register" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_address_one"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/address_line_one"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/header_divider_0">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:singleLine="true"
+                                    android:text="@={model.addressRegisterLine1}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_country"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/country"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_address_one">
+
+                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/etRegisterCountry"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                                    android:focusable="false"
+                                    android:text="@={ model.addressRegisterCountry }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_state"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/state"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_country">
+
+                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/etRegisterState"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                                    android:focusable="false"
+                                    android:text="@={ model.addressRegisterState }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_city"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/city"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_state">
+
+                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/etRegisterCity"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                                    android:focusable="false"
+                                    android:text="@={ model.addressRegisterCity }"
+                                    app:dropDownMenu="@{model.cityArrayRegister}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_tehsil"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/taluk"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_city">
+
+                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/etTehsil"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                                    android:focusable="false"
+                                    android:text="@={ model.addressRegisterTehsil }"
+                                    app:dropDownMenu="@{model.tehsilArray}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_pin"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/pin"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_tehsil">
+
+                                <com.artisan.un.utils.customView.CustomEditText
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:maxLength="6"
+                                    android:singleLine="true"
+                                    android:text="@={ model.addressRegisterPin }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <com.artisan.un.utils.customView.CustomButton
+                    android:id="@+id/verify_btn"
+                    style="@style/ThemeButtonFill"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:onClick="@{() -> listener.onVerifyClick()}"
+                    android:text="@string/verify"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/views" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/progressBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:visibility="@{ isLoading? View.VISIBLE: View.GONE, default=gone }">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

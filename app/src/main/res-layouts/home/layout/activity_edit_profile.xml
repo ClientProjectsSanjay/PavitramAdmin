@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.artisan.un.utils.TextInputType" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.EditProfileListener" />
+
+        <variable
+            name="user"
+            type="com.artisan.un.utils.apis.UserInfo" />
+
+        <variable
+            name="address"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:background="@color/toll_bar_color"
+            app:hideNotification="@{ true }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:listener="@{ appBarListener }"
+            app:showBack="@{ true }"
+            app:title="@{ @string/edit_profile }" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_name"
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="39dp"
+                    android:hint="@string/your_shg_name">
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:digits="@string/digits_name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:text="@={ user.name }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_profession"
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:hint="@string/title">
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:digits="@string/digits_name"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:text="@={ user.title }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_email"
+                    style="@style/ThemeInputTextLayout"
+                    android:layout_width="match_parent"
+                    android:hint="@string/email_id">
+
+                    <com.artisan.un.utils.customView.CustomEditText
+                        style="@style/ThemeEditText"
+                        android:layout_width="match_parent"
+                        android:digits="@string/digits_email"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:text="@={ user.email }" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_mobile_no"
+                        style="@style/ThemeInputTextLayout"
+                        android:layout_width="0dp"
+                        android:hint="@string/mobile_no"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.artisan.un.utils.customView.CustomEditText
+                            style="@style/ThemeEditText"
+                            android:layout_width="match_parent"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:text="@={ user.mobile }" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="@{() -> listener.onEditMobileNoClick(user.mobile)}"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/change_mobile_no"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/input_mobile_no"
+                        app:layout_constraintEnd_toEndOf="@id/input_mobile_no"
+                        app:layout_constraintTop_toTopOf="@id/input_mobile_no" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_address"
+                        style="@style/ThemeInputTextLayout"
+                        android:layout_width="0dp"
+                        android:hint="@string/address"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.artisan.un.utils.customView.CustomEditText
+                            style="@style/ThemeEditText"
+                            android:layout_width="match_parent"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:includeFontPadding="false"
+                            android:paddingEnd="125dp"
+                            android:scrollHorizontally="false"
+                            android:singleLine="true"
+                            android:text="@{ address }"
+                            tools:ignore="RtlSymmetry" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="@{() -> listener.onEditAddressClick()}"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/change_address"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/input_address"
+                        app:layout_constraintEnd_toEndOf="@id/input_address"
+                        app:layout_constraintTop_toTopOf="@id/input_address" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_password"
+                        style="@style/ThemeInputTextLayout"
+                        android:layout_width="0dp"
+                        android:hint="@string/password"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.artisan.un.utils.customView.CustomEditText
+                            style="@style/ThemeEditText"
+                            android:layout_width="match_parent"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:includeFontPadding="false"
+                            android:paddingEnd="140dp"
+                            android:scrollHorizontally="false"
+                            android:singleLine="true"
+                            android:text="**********"
+                            tools:ignore="RtlSymmetry" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:onClick="@{() -> listener.onChangePasswordClick()}"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/change_password"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/input_password"
+                        app:layout_constraintEnd_toEndOf="@id/input_password"
+                        app:layout_constraintTop_toTopOf="@id/input_password" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.artisan.un.utils.customView.CustomButton
+            style="@style/ThemeButtonFill"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:onClick="@{() -> listener.onSaveChangesClick(user)}"
+            android:text="@string/save_changes" />
+
+    </LinearLayout>
+</layout>

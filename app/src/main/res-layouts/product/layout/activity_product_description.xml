@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="message"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="images"
+            type="java.util.ArrayList&lt;String&gt;" />
+
+        <variable
+            name="appBarListener"
+            type="com.artisan.un.utils.AppBarListener" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.ProductDescriptionListener" />
+
+        <variable
+            name="product"
+            type="com.artisan.un.apiModel.ProductDetails" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:background="@color/white"
+            app:hideNotification="@{ true }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:listener="@{ appBarListener }"
+            app:showBack="@{ true }"
+            app:title="@{ product.template_name }" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="@{ product != null ? View.VISIBLE : View.GONE, default=gone }">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:includeFontPadding="false"
+                            android:text="@{ @string/pdx_id + ` ` + String.format(`%06d`, product.id) }"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/sub_title_text_size"
+                            app:font_name="bold" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:includeFontPadding="false"
+                            android:text="@{ product.template_name + ` (` + product.name + `)` }"
+                            android:textColor="@color/darkGray"
+                            android:textSize="@dimen/title_text_size"
+                            app:font_name="bold" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/darkGray"
+                            app:productDimension="@{ product }" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/input_border_color" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp">
+
+                            <LinearLayout
+                                android:id="@+id/container_one"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toStartOf="@id/container_two"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:orientation="vertical">
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/by" />
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxLines="1"
+                                        android:text="@{ product.artisanshgname }"
+                                        android:textColor="@color/darkGray"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_marginTop="8dp"
+                                    android:orientation="vertical">
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{ @string/available + ` (Qty)` }" />
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxLines="1"
+                                        android:text="@{ product.qty }"
+                                        android:textColor="@color/darkGray"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/container_two"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/container_one"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:orientation="vertical">
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/made_with" />
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxLines="1"
+                                        android:text="@{ product.materialname }"
+                                        android:textColor="@color/darkGray"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_marginTop="8dp"
+                                    android:orientation="vertical">
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/price" />
+
+                                    <com.artisan.un.utils.customView.CustomTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:maxLines="1"
+                                        android:text="@{ `₹` + product.price + `/Pc` }"
+                                        android:textColor="@color/darkGray"
+                                        android:textSize="16sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/input_border_color" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{ product.description }"
+                            android:textColor="@color/darkGray" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <include
+                        layout="@layout/view_action_button_secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> listener.onEditClick()}"
+                        app:title="@{ @string/edit }" />
+
+                    <include
+                        layout="@layout/view_action_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> listener.onDeleteClick()}"
+                        app:title="@{ @string/delete }" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{ message }"
+                android:visibility="@{ message == null ? View.GONE : View.VISIBLE, default=gone }" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{ isLoading ? View.VISIBLE : View.GONE, default=gone }" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

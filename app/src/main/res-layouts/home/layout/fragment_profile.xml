@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isAadharVerified"
+            type="boolean" />
+
+        <variable
+            name="isAadharRejected"
+            type="boolean" />
+
+        <variable
+            name="showPan"
+            type="boolean" />
+
+        <variable
+            name="showAddPan"
+            type="boolean" />
+
+        <variable
+            name="isPanVerified"
+            type="boolean" />
+
+        <variable
+            name="showBrn"
+            type="boolean" />
+
+        <variable
+            name="showAddBrn"
+            type="boolean" />
+
+        <variable
+            name="isBrnVerified"
+            type="boolean" />
+
+        <variable
+            name="image"
+            type="String" />
+
+        <variable
+            name="userId"
+            type="int" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="mobile"
+            type="String" />
+
+        <variable
+            name="email"
+            type="String" />
+
+        <variable
+            name="address"
+            type="String" />
+
+        <variable
+            name="isSanjeeviniShg"
+            type="int" />
+
+        <variable
+            name="sanjeeviniShgName"
+            type="String" />
+
+        <variable
+            name="sanjeeviniShgGplf"
+            type="String" />
+
+        <variable
+            name="sanjeeviniShgMisCode"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.ProfileListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/page_bg_color">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/edit_profile_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="24dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="144dp"
+                    android:background="@drawable/top_bar_bigger"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/user_info_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="66dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp">
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="66dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@{ @string/ven_id + ` ` + String.format(`%06d`, userId) }"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/title_text_size"
+                            app:font_name="bold" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@{ name }"
+                            android:textColor="@color/brown"
+                            android:textSize="@dimen/title_text_size"
+                            app:font_name="bold" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center"
+                            android:text="@{ title }"
+                            android:textColor="@color/brown"
+                            android:textSize="@dimen/sub_title_text_size"
+                            android:visibility="@{ title == null ? View.GONE : View.VISIBLE, default=gone }" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/input_border_color" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="6dp"
+                            android:text="@{ mobile }"
+                            android:textSize="14sp"
+                            app:drawableLeftCompat="@drawable/ic_outline_local_phone" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:padding="8dp"
+                            android:paddingStart="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="6dp"
+                            android:text="@{ email }"
+                            android:textSize="14sp"
+                            android:visibility="@{ email==null || email.empty? View.GONE: View.VISIBLE }"
+                            app:drawableLeftCompat="@drawable/ic_icon_material_mail_outline" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:paddingStart="12dp"
+                            android:paddingTop="6dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="6dp"
+                            android:text="@{ address }"
+                            android:textSize="14sp"
+                            app:drawableLeftCompat="@drawable/ic_outline_location_on" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/profile_card"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintBottom_toTopOf="@id/user_info_card"
+                    app:layout_constraintEnd_toEndOf="@id/user_info_card"
+                    app:layout_constraintStart_toStartOf="@id/user_info_card"
+                    app:layout_constraintTop_toTopOf="@id/user_info_card">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/profile_placeholder"
+                        app:loadImage="@{ image }"
+                        tools:ignore="ContentDescription" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/sajeevini_shg_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="@{isSanjeeviniShg==1?View.VISIBLE:View.GONE, default=gone}"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_info_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp">
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="@string/sanjeevini_shg"
+                            android:textColor="@color/brown"
+                            android:textSize="20sp"
+                            app:font_name="bold" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:includeFontPadding="false"
+                            android:paddingBottom="3dp"
+                            android:text="@{@string/shg_name +`: `+ sanjeeviniShgName}"
+                            android:textColor="@color/warmGray"
+                            android:textSize="14sp" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:includeFontPadding="false"
+                            android:paddingVertical="3dp"
+                            android:text="@{@string/shg_gplf +`: `+ sanjeeviniShgGplf}"
+                            android:textColor="@color/warmGray"
+                            android:textSize="14sp" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:includeFontPadding="false"
+                            android:paddingVertical="3dp"
+                            android:text="@{@string/shg_mis_code +`: `+ sanjeeviniShgMisCode}"
+                            android:textColor="@color/warmGray"
+                            android:textSize="14sp"
+                            android:visibility="@{sanjeeviniShgMisCode==null?View.GONE:View.VISIBLE, default=gone}" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/document_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sajeevini_shg_info">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp">
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="@string/document"
+                            android:textColor="@color/brown"
+                            android:textSize="20sp"
+                            app:font_name="bold" />
+
+                        <include
+                            android:id="@+id/doc_aadhar"
+                            layout="@layout/view_card_verification_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            app:isRejected="@{ isAadharRejected }"
+                            app:isVerified="@{ isAadharVerified }"
+                            app:title="@{ @string/aadhar_card }" />
+
+                        <include
+                            android:id="@+id/doc_brn"
+                            layout="@layout/view_card_verification_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:visibility="@{ showBrn ? View.VISIBLE : View.GONE, default=gone }"
+                            app:isVerified="@{ isBrnVerified }"
+                            app:title="@{ @string/brn }" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:id="@+id/add_brn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/outline_gray_corner_round_8"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:padding="16dp"
+                            android:text="@string/add_brn_info"
+                            android:textColor="@color/warmGray"
+                            android:visibility="@{ showAddBrn ? View.VISIBLE : View.GONE, default=gone }" />
+
+                        <include
+                            android:id="@+id/doc_pan"
+                            layout="@layout/view_card_verification_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:visibility="@{ showPan ? View.VISIBLE : View.GONE, default=gone }"
+                            app:isVerified="@{ isPanVerified }"
+                            app:title="@{ @string/pan_card }" />
+
+                        <com.artisan.un.utils.customView.CustomTextView
+                            android:id="@+id/add_pan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/outline_gray_corner_round_8"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:padding="16dp"
+                            android:text="@string/add_pan_info"
+                            android:textColor="@color/warmGray"
+                            android:visibility="@{ showAddPan ? View.VISIBLE : View.GONE, default=gone }" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <include
+            android:id="@+id/edit_profile_button"
+            layout="@layout/view_action_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> listener.onEditProfileClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{ @string/edit_profile }" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

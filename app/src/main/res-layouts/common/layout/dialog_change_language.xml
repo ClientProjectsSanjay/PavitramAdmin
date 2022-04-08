@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.artisan.un.utils.AppLanguage" />
+
+        <variable
+            name="selectedLanguage"
+            type="AppLanguage" />
+
+        <variable
+            name="listener"
+            type="com.artisan.un.utils.LanguageSelectionListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="@string/choose_language"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/appbar_title_text_size"
+                app:font_name="bold" />
+
+            <com.artisan.un.utils.customView.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:includeFontPadding="false"
+                android:text="@string/please_select_preferred_language"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/sub_title_text_size"
+                app:font_name="medium" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/divider" />
+
+            <include
+                layout="@layout/view_language_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:onClick="@{() -> listener.selectLanguage(AppLanguage.ENGLISH)}"
+                app:isSelected="@{ selectedLanguage == AppLanguage.ENGLISH }"
+                app:title="@{ @string/lang_english }" />
+
+            <include
+                layout="@layout/view_language_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="@{() -> listener.selectLanguage(AppLanguage.KANNADA)}"
+                app:isSelected="@{ selectedLanguage == AppLanguage.KANNADA }"
+                app:title="@{ @string/lang_kannada }" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/view_action_button_secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> listener.onCancelClick()}"
+                    app:title="@{ @string/cancel }" />
+
+                <include
+                    layout="@layout/view_action_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> listener.onProceedClick()}"
+                    app:title="@{ @string/proceed }" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
