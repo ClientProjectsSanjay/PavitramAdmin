@@ -261,6 +261,8 @@
     <string name="shg_details">SHG Details</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="quantity_update">Quantity Update</string>
+    <string name="add_value">Add Value</string>
 
     <array name="user_types">
         <item>Artisan</item>
