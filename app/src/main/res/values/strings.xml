@@ -45,6 +45,7 @@
     <string name="please_enter_following_details">Please enter following details</string>
     <string name="aadhar_image_front">Aadhar Image (Front)</string>
     <string name="aadhar_image_back">Aadhar Image (Back)</string>
+    <string name="letter_of_authentication">Letter Of Authentication (Letterhead)</string>
     <string name="aadhar_card_number">Aadhar Card Number</string>
     <string name="name_as_per_aadhar">Name As Per Aadhar</string>
     <string name="dob_as_per_aadhar">DOB As Per Aadhar</string>
@@ -54,7 +55,7 @@
 
     <string name="bank_account_name">Account Holder Name</string>
     <string name="bank_account_number">Account Number</string>
-    <string name="bank_account_ifsc_code">Ifsc Code</string>
+    <string name="bank_account_ifsc_code">IFSC Code</string>
     <string name="bank_account_gst">GST</string>
     <string name="bank_account_ffcc">FSSAI Licance Number</string>
 
@@ -64,10 +65,15 @@
     <string name="name_as_per_pan">Name As Per PAN</string>
     <string name="dob_as_per_pan">DOB As Per PAN</string>
     <string name="pan_image">PAN Image</string>
+    <string name="gst_image">GST Certificate Image</string>
+    <string name="udhyam_image">Udhyam Certificate</string>
+    <string name="factory_image">Factory Certificate</string>
     <string name="brn">BRN</string>
     <string name="brn_number">BRN Number</string>
     <string name="name_as_per_barn_brn">Name as per BRN</string>
     <string name="brn_image">BRN Image</string>
+    <string name="fssai_certificate">FSSAI Certificate</string>
+    <string name="bank_account_proof_messge">Cancel Cheque/Passbook/Ac. Statement</string>
     <string name="country">Country</string>
     <string name="state">State</string>
     <string name="city">District</string>
@@ -116,10 +122,14 @@
     <string name="enter_mobile_or_email">Enter Mobile No/Email Id</string>
     <string name="invalid_mobile_or_email">Invalid Mobile No/Email Id</string>
     <string name="aadhar_information_required">Aadhar Information Required</string>
+    <string name="company_information_required">Company Information Required</string>
     <string name="bank_information_required">Bank Information Required</string>
 
+    <string name="gst_information_required">GST Information Required</string>
     <string name="pan_information_required">PAN Information Required</string>
     <string name="brn_information_required">BRN Information Required</string>
+    <string name="fssai_information_required">FSSAI Information Required</string>
+    <string name="msme_information_required">MSME Information Required</string>
     <string name="registered_address_required">Registered Address Required</string>
     <string name="office_address_required">Office Address Required</string>
     <string name="enter_registered_mobile_number">Enter registered mobile no.</string>
@@ -204,8 +214,13 @@
     <string name="at_least_one_image_required">At least one image required</string>
     <string name="enter_valid_aadhar_number">Enter a valid aadhar number</string>
     <string name="enter_valid_pan_number">Enter a valid PAN number</string>
+    <string name="enter_valid_gst_number">Enter a valid GST number</string>
     <string name="partial_pan_information_not_allowed">Partial PAN details not allowed</string>
+    <string name="partial_bank_information_not_allowed">Partial Bank details not allowed</string>
+    <string name="partial_gst_information_not_allowed">Partial GST details not allowed</string>
     <string name="partial_brn_information_not_allowed">Partial BRN details not allowed</string>
+    <string name="partial_fssai_information_not_allowed">Partial FSSAI details not allowed</string>
+    <string name="partial_msme_information_not_allowed">Partial MSME details not allowed</string>
     <string name="enter_valid_brn_number">Enter a valid BRN number</string>
     <string name="enter_valid_pin_number">Enter a valid pin number</string>
     <string name="user_type">User Type</string>
@@ -261,6 +276,29 @@
     <string name="shg_details">SHG Details</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="user_information">User Information</string>
+    <string name="call">Call</string>
+    <string name="email">Email</string>
+    <string name="seller_information">Seller Information</string>
+    <string name="order_details">Order Details</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="payment_status">Payment Status</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="purchase_date">Purchase Date</string>
+    <string name="purchased_item_details">Purchased Item Details</string>
+    <string name="quantity">Quantity</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="fssai">FSSAI</string>
+    <string name="registration_license_number">Registration/License Number</string>
+    <string name="gst_registration_details">GST Registration Details</string>
+    <string name="msme_registration_details">MSME Registration Details</string>
+    <string name="gst_number">GST Card Number</string>
+    <string name="udhyam_registration_name">Udhyam Registration Name</string>
+    <string name="factiry_licence_number">Factory Licence Number</string>
+    <string name="company_details">Company Details</string>
+    <string name="company_name">Company Name</string>
+    <string name="authorized_person_aadhar_number">Authorized Person Aadhar Card Number</string>
+    <string name="upload_supporting_file">Upload supporting file</string>
 
     <array name="user_types">
         <item>Artisan</item>

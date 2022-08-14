@@ -43,16 +43,18 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel>(private val 
     }
 
     private fun observerData() {
-        mViewModel.errorMessage.observe(requireActivity(), {
-            if(isAdded) {
+        mViewModel.errorMessage.observe(requireActivity()) {
+            if (isAdded) {
                 it.message?.let { message ->
-                    if(it.priority == ErrorPriority.MEDIUM) viewDataBinding.root.showMessage(message)
+                    if (it.priority == ErrorPriority.MEDIUM) viewDataBinding.root.showMessage(
+                        message
+                    )
                 }
             }
-        })
+        }
 
-        mViewModel.noInternet.observe(requireActivity(), {
-            if(isAdded) {
+        mViewModel.noInternet.observe(requireActivity()) {
+            if (isAdded) {
                 CustomAlertDialog(
                     context = requireContext(),
                     isCancelable = false,
@@ -61,15 +63,15 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel>(private val 
                     primaryKeyAction = { onCreateView() }
                 ).show()
             }
-        })
+        }
 
-        mViewModel.progress.observe(requireActivity(), {
-            if(isAdded) {
-                if(it) progressBar.show() else progressBar.dismiss()
+        mViewModel.progress.observe(requireActivity()) {
+            if (isAdded) {
+                if (it) progressBar.show() else progressBar.dismiss()
             }
-        })
+        }
 
-        mViewModel.userBlocked.observe(this, {
+        mViewModel.userBlocked.observe(requireActivity()) {
             it?.let {
                 CustomAlertDialog(
                     context = requireContext(),
@@ -87,6 +89,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel>(private val 
                     }
                 ).show()
             }
-        })
+        }
     }
 }

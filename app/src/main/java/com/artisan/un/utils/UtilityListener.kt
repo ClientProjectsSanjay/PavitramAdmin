@@ -1,20 +1,17 @@
 package com.artisan.un.utils
 
+import android.content.Context
 import android.widget.CheckBox
 import com.artisan.un.apiModel.AuthModel
 import com.artisan.un.apiModel.LoginModel
 import com.artisan.un.utils.apis.UserAddress
 import com.artisan.un.utils.apis.UserInfo
+import com.google.android.material.textfield.TextInputEditText
 
 interface DocumentVerificationListener {
-    fun onBackClick()
+    fun onUploadFileClick(context: Context, fileType: DocumentFileType)
+    fun onSelectDateClick(context: Context, dateType: DateOfBirthType, view: TextInputEditText)
     fun onVerifyClick()
-    fun doPickAADHARDOB()
-    fun doPickAADHARFront()
-    fun doPickAADHARBack()
-    fun doPickPAN()
-    fun doPickPANBOB()
-    fun doPickBRN()
 }
 
 interface ForgotPasswordListener {

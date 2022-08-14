@@ -19,20 +19,24 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
     }
 
     private fun observeData() {
-        mViewModel.userResponse.observe(this, {
-            if(it?.user == null && it?.is_otp_verified == 0) {
+        mViewModel.userResponse.observe(this) {
+            if (it?.user == null && it?.is_otp_verified == 0) {
                 showOtp(it.otp)
 
-                navigateTo(ActivityOtpVerification::class.java, arrayListOf(
-                    Pair(ActivityOtpVerification.MOBILE, it.mobile),
-                    Pair(ActivityOtpVerification.REDIRECT, ActivityOtpVerification.SIGN_UP),
-                ))
-            } else if(it?.user?.is_document_added == 0) {
+                navigateTo(
+                    ActivityOtpVerification::class.java, arrayListOf(
+                        Pair(ActivityOtpVerification.MOBILE, it.mobile),
+                        Pair(ActivityOtpVerification.REDIRECT, ActivityOtpVerification.SIGN_UP),
+                    )
+                )
+            } else if (it?.user?.is_document_added == 0) {
                 saveUserData(it)
 
-                navigateTo(ActivityDocumentsUpload::class.java, arrayListOf(
-                    Pair(USER_ROLE, it.user.role_id),
-                ))
+                navigateTo(
+                    ActivityDocumentsUpload::class.java, arrayListOf(
+                        Pair(USER_ROLE, it.user.role_id),
+                    )
+                )
 
                 finishAffinity()
             } else {
@@ -40,7 +44,7 @@ class ActivityLogin : BaseActivity<ActivityLoginBinding, LoginViewModel>(R.layou
                 navigateTo(MainActivity::class.java)
                 finishAffinity()
             }
-        })
+        }
     }
 
     private fun saveUserData(user: UserResponse) {

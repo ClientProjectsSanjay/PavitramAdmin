@@ -16,9 +16,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.databinding.BindingAdapter
 import com.artisan.un.BuildConfig
+import com.artisan.un.R
 import com.artisan.un.helpers.PreferencesHelper
 import com.artisan.un.utils.apis.UserAddress
+import com.artisan.un.utils.customView.CustomTextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.messaging.FirebaseMessaging
@@ -273,4 +276,9 @@ fun Activity.getPicturesFileUri(fileName: String): Uri? = run {
     } ?: run {
         null
     }
+}
+
+@BindingAdapter(value = ["app:hint", "app:file"], requireAll = true)
+fun CustomTextView.setFileNameAndHint(hint: String?, file: File?) {
+    text = file?.let { file.name } ?: run { hint ?: context.getString(R.string.upload_supporting_file) }
 }

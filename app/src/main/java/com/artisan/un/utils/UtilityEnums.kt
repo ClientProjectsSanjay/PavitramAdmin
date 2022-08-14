@@ -38,3 +38,21 @@ enum class ProductMediaType{
     IMAGE,
     FILE,
 }
+
+enum class DocumentFileType(requestCode: Int){
+    AADHARFRONT(101),
+    AADHARBACK(201),
+    LETTERHEAD(301),
+    PAN(401),
+    GST(501),
+    BRN(601),
+    UDHYAM(701),
+    FACTORY(801),
+    FSSAI(901),
+    ACCOUNTPROOF(1001),
+}
+
+enum class DateOfBirthType{
+    AADHAR,
+    PAN,
+}

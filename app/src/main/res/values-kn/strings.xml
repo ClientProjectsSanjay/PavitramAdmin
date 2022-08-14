@@ -47,7 +47,7 @@
 
     <string name="bank_account_name">Account Holder Name</string>
     <string name="bank_account_number">Account Number</string>
-    <string name="bank_account_ifsc_code">Ifsc Code</string>
+    <string name="bank_account_ifsc_code">IFSC Code</string>
     <string name="bank_account_gst">GST</string>
     <string name="bank_account_ffcc">FSSAI Licance Number</string>
 

@@ -4,6 +4,8 @@ import com.artisan.un.baseClasses.CommonViewModel
 import com.artisan.un.ui.home.viewModel.*
 import com.artisan.un.ui.product.viewModel.*
 import com.artisan.un.ui.userauth.viewModel.*
+import com.artisan.un.ui.home.myOrder.viewmodel.OrderDetailsViewModel
+import com.artisan.un.ui.home.myOrder.viewmodel.OrderListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -23,5 +25,7 @@ val myViewModel = module {
     viewModel { ProductionDescriptionViewModel(get()) }
     viewModel { ProductViewModel(get()) }
     viewModel { ChangePasswordViewModel(get()) }
+    viewModel { OrderDetailsViewModel(get()) }
+    viewModel { OrderListViewModel(get()) }
 }
 

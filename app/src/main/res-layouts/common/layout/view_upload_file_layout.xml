@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="java.io.File" />
 
         <variable
-            name="title"
+            name="file"
+            type="File" />
+
+        <variable
+            name="hint"
             type="String" />
     </data>
 
@@ -24,7 +29,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:singleLine="true"
-            android:text="@{ title }"
+            app:hint="@{ hint }"
+            app:file="@{ file }"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/upload_btn"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,27 +1,30 @@
-package com.yuwaah.view.opportunity
+package com.artisan.un.ui.home.myOrder
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.artisan.un.R
+import com.artisan.un.baseClasses.BaseFragment
 import com.artisan.un.databinding.ViewRecyclerviewBinding
-import com.artisan.un.ui.home.myOrder.OrderDetailActivity
-import com.artisan.un.ui.home.myOrder.OrderPendingRecyclerViewAdapter
-import com.artisan.un.utils.navigateTo
+import com.artisan.un.ui.home.myOrder.viewmodel.OrderListViewModel
+import com.artisan.un.utils.ApplicationData
 
-class FragmentPending : Fragment() {
-    private lateinit var mDataBinding: ViewRecyclerviewBinding
-    var mRecyclerViewAdapter = OrderPendingRecyclerViewAdapter(::onClick)
+class FragmentPending : BaseFragment<ViewRecyclerviewBinding, OrderListViewModel>(R.layout.view_recyclerview, OrderListViewModel::class) {
+    private val mOrderPendingRecyclerViewAdapter = OrderPendingRecyclerViewAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        mDataBinding = ViewRecyclerviewBinding.inflate(inflater, container, false)
-        mDataBinding.recyclerView.adapter = mRecyclerViewAdapter
-        return mDataBinding.root
+    override fun onCreateView() {
+        viewDataBinding.recyclerView.adapter = mOrderPendingRecyclerViewAdapter
+
+        initObserver()
+        initListener()
+
+        mViewModel.getSellerOrderList(ApplicationData.user?.user?.id?.toInt() ?: 0)
     }
 
-    private fun onClick(position: Int) {
-        requireActivity().navigateTo(OrderDetailActivity::class.java)
+    private fun initObserver() {
+        mViewModel.mOrderListObservable.observe(requireActivity()) {
+            mOrderPendingRecyclerViewAdapter.addData(it.order_list)
+        }
     }
 
+    private fun initListener() {
+
+    }
 }
