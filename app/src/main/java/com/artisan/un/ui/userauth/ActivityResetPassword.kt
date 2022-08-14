@@ -18,10 +18,10 @@ class ActivityResetPassword : BaseActivity<ActivityResetPasswordBinding, ResetPa
     }
 
     private fun observeData() {
-        mViewModel.requestStatus.observe(this, {
+        mViewModel.requestStatus.observe(this) {
             navigateTo(ActivityLogin::class.java)
             finishAffinity()
-        })
+        }
     }
 
     override fun onResetClick(password: String?, confirmPassword: String?) {

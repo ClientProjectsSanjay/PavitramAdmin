@@ -41,6 +41,7 @@
     <string name="reset_password">Reset Password</string>
     <string name="reset">Reset</string>
     <string name="aadhar_card">Aadhar Card</string>
+    <string name="aadhar_card_astrics">Aadhar Card <a style="color:#E53935">*</a></string>
     <string name="document">Document</string>
     <string name="please_enter_following_details">Please enter following details</string>
     <string name="aadhar_image_front">Aadhar Image (Front)</string>
@@ -79,7 +80,7 @@
     <string name="city">District</string>
     <string name="taluk">Taluk</string>
     <string name="pin">Pin</string>
-    <string name="registered_address">Registered Address</string>
+    <string name="registered_address">Registered Address <a style="color:#E53935">*</a></string>
     <string name="office_address_same_as_registered">Office address is same as registered address</string>
     <string name="office_address">Office Address</string>
     <string name="address_line_one">Address Line</string>
@@ -295,10 +296,12 @@
     <string name="gst_number">GST Card Number</string>
     <string name="udhyam_registration_name">Udhyam Registration Name</string>
     <string name="factiry_licence_number">Factory Licence Number</string>
-    <string name="company_details">Company Details</string>
+    <string name="company_details">Company Details <a style="color:#E53935">*</a></string>
     <string name="company_name">Company Name</string>
     <string name="authorized_person_aadhar_number">Authorized Person Aadhar Card Number</string>
     <string name="upload_supporting_file">Upload supporting file</string>
+    <string name="tehsil">Tehsil</string>
+    <string name="bank_account_details">Bank Account Details <a style="color:#E53935">*</a></string>
 
     <array name="user_types">
         <item>Artisan</item>

@@ -47,6 +47,7 @@ data class DocumentsFormDataModel(
     var registeredAddressCountry: String? = null,
     var registeredAddressState: String? = null,
     var registeredAddressCity: String? = null,
+    var registeredAddressTehsil: String? = null,
     var registeredAddressPin: String? = null,
 ) {
 
@@ -124,9 +125,10 @@ data class DocumentsFormDataModel(
                 context.getString(R.string.msme_information_required)
             else null
         } else {
-            if (!udhyamName.isNullOrEmpty() || !factoryNumber.isNullOrEmpty() || udhyamImage != null || factoryImage != null) {
+            if(!udhyamName.isNullOrEmpty() && !factoryNumber.isNullOrEmpty() && udhyamImage != null && factoryImage != null) null
+            else if (!udhyamName.isNullOrEmpty() || !factoryNumber.isNullOrEmpty() || udhyamImage != null || factoryImage != null)
                 context.getString(R.string.partial_msme_information_not_allowed)
-            } else null
+            else null
         }
     }
 
@@ -136,26 +138,30 @@ data class DocumentsFormDataModel(
                 context.getString(R.string.fssai_information_required)
             else null
         } else {
-            if (!fssaiNumber.isNullOrEmpty() || fssaiImage != null) {
+            if (!fssaiNumber.isNullOrEmpty() && fssaiImage != null) null
+            else if (!fssaiNumber.isNullOrEmpty() || fssaiImage != null)
                 context.getString(R.string.partial_fssai_information_not_allowed)
-            } else null
+            else null
         }
     }
 
     fun getBankAccountError(context: Context, isRequired: Boolean = false): String? = run {
+        println(bankAccountNumber)
+
         if(isRequired) {
-            if(bankAccountNumber.isNullOrEmpty() || bankAccountNumber.isNullOrEmpty() || bankIFSC.isNullOrEmpty() || accountProofImage == null)
+            if(bankAccountNumber.isNullOrEmpty() || bankAccountName.isNullOrEmpty() || bankIFSC.isNullOrEmpty() || accountProofImage == null)
                 context.getString(R.string.bank_information_required)
             else null
         } else {
-            if(!bankAccountNumber.isNullOrEmpty() || !bankAccountNumber.isNullOrEmpty() || !bankIFSC.isNullOrEmpty() || accountProofImage != null)
+            if(!bankAccountNumber.isNullOrEmpty() && !bankAccountName.isNullOrEmpty() && !bankIFSC.isNullOrEmpty() && accountProofImage != null) null
+            else if(!bankAccountNumber.isNullOrEmpty() || !bankAccountName.isNullOrEmpty() || !bankIFSC.isNullOrEmpty() || accountProofImage != null)
                 context.getString(R.string.partial_bank_information_not_allowed)
             else null
         }
     }
 
     fun getRegisteredAddressError(context: Context): String? = run {
-        if (registeredAddressLine.isNullOrEmpty() || registeredAddressCountry.isNullOrEmpty() || registeredAddressState.isNullOrEmpty() || registeredAddressCity.isNullOrEmpty() || registeredAddressPin.isNullOrEmpty())
+        if (registeredAddressLine.isNullOrEmpty() || registeredAddressCountry.isNullOrEmpty() || registeredAddressState.isNullOrEmpty() || registeredAddressCity.isNullOrEmpty() || registeredAddressTehsil.isNullOrEmpty() || registeredAddressPin.isNullOrEmpty())
             context.getString(R.string.registered_address_required)
         else if ((registeredAddressPin?.length ?: 0) < 6)
             context.getString(R.string.enter_valid_pin_number)
@@ -206,6 +212,12 @@ data class DocumentsFormDataModel(
         if(registeredAddressCity != null) {
             requestMap["district_registered"] = (cityData.value?.find {
                 it.name.equals(registeredAddressCity, true)
+            }?.id ?: 0).toString().toRequestBody()
+        }
+
+        if(registeredAddressTehsil != null) {
+            requestMap["tehsil_id"] = (cityData.value?.find {
+                it.name.equals(registeredAddressTehsil, true)
             }?.id ?: 0).toString().toRequestBody()
         }
 

@@ -47,20 +47,22 @@ class ActivityEnterMobile : BaseActivity<ActivityEnterMobileBinding, ForgotPassw
     }
 
     private fun observeData() {
-        mViewModel.otp.observe(this, {
+        mViewModel.otp.observe(this) {
             showOtp(it.otp)
 
-            when(enterMobileAction) {
+            when (enterMobileAction) {
                 EnterMobileAction.FORGOT_PASSWORD.action -> ActivityOtpVerification.FORGOT_PASSWORD
                 EnterMobileAction.UPDATE_MOBILE.action -> ActivityOtpVerification.UPDATE_MOBILE_NO
                 else -> null
             }?.let { actionType ->
-                navigateTo(ActivityOtpVerification::class.java, arrayListOf(
-                    Pair(ActivityOtpVerification.MOBILE, mViewModel.mobile.value),
-                    Pair(ActivityOtpVerification.REDIRECT, actionType),
-                ))
+                navigateTo(
+                    ActivityOtpVerification::class.java, arrayListOf(
+                        Pair(ActivityOtpVerification.MOBILE, mViewModel.mobile.value),
+                        Pair(ActivityOtpVerification.REDIRECT, actionType),
+                    )
+                )
             }
-        })
+        }
     }
 
     override fun onBackClick() = onBackPressed()

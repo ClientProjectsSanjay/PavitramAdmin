@@ -31,6 +31,9 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
     private val mCityLiveData = MutableLiveData<ArrayList<CityData>>()
     val mCityDataObservable: LiveData<ArrayList<CityData>> = mCityLiveData
 
+    private val mTehsilLiveData = MutableLiveData<ArrayList<TehsilData>>()
+    val mTehsilDataObservable: LiveData<ArrayList<TehsilData>> = mTehsilLiveData
+
     private val mUserResponse = MutableLiveData<UserResponse>()
     val mUserResponseObservable: LiveData<UserResponse> = mUserResponse
 
@@ -40,7 +43,7 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
                 mCountryLiveData.postValue(it.data?.country)
 
                 it.data?.country?.find { country -> country.id == DEFAULT_COUNTRY_CODE }?.let { country ->
-                    mDocumentsFormModel.value?.registeredAddressCountry = country.name
+                    mDocumentsFormModel.postValue(mDocumentsFormModel.value?.apply { registeredAddressCountry = country.name })
                 }
             },
         )
@@ -54,7 +57,7 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
             mStateLiveData.postValue(it.data?.states)
 
             it.data?.states?.find { state -> state.id == DEFAULT_STATE_CODE }?.let { state ->
-                mDocumentsFormModel.value?.registeredAddressState = state.name
+                mDocumentsFormModel.postValue(mDocumentsFormModel.value?.apply { registeredAddressState = state.name })
             }
         })
     }
@@ -66,6 +69,13 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
         requestData(apis.getCity(map), {
             mCityLiveData.postValue(it.data?.district)
         })
+    }
+
+    fun getTehsil(city_id: Int) {
+        val map = HashMap<String, Any>()
+        map["city_id"] = city_id
+
+        requestData(apis.getTehsil(map), { mTehsilLiveData.postValue(it.data?.tehsil) })
     }
 
     fun requestUserProfile() {

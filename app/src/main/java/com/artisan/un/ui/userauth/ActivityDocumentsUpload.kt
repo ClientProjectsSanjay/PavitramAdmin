@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toFile
+import androidx.core.widget.doOnTextChanged
 import com.artisan.un.R
 import com.artisan.un.baseClasses.BaseActivity
 import com.artisan.un.databinding.ActivityDocumentsUploadBinding
@@ -102,6 +103,13 @@ class ActivityDocumentsUpload : BaseActivity<ActivityDocumentsUploadBinding, Doc
         viewDataBinding.radioIndividual.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) handleFormView(Roles.Artisan.ID)
         }
+
+        viewDataBinding.inputCity.doOnTextChanged { text, _, _, _ ->
+            val cityId = mViewModel.mCityDataObservable.value?.firstOrNull { it.name == text?.toString() }?.id
+            viewDataBinding.inputTehsil.text = null
+
+            if (cityId != null) mViewModel.getTehsil(cityId)
+        }
     }
 
     private fun initObserver() {
@@ -115,6 +123,10 @@ class ActivityDocumentsUpload : BaseActivity<ActivityDocumentsUploadBinding, Doc
 
         mViewModel.mCityDataObservable.observe(this) { cityData ->
             viewDataBinding.cityList = cityData.map { it.name ?: "" } as ArrayList<String>
+        }
+
+        mViewModel.mTehsilDataObservable.observe(this) { tehsilData ->
+            viewDataBinding.tehsilList = tehsilData.map { it.name ?: "" } as ArrayList<String>
         }
 
         mViewModel.mRequestStatusObservable.observe(this) {

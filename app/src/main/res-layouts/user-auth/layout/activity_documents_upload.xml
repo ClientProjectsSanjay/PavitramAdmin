@@ -22,6 +22,10 @@
         <variable
             name="cityList"
             type="ArrayList&lt;String&gt;" />
+
+        <variable
+            name="tehsilList"
+            type="ArrayList&lt;String&gt;" />
     </data>
 
     <RelativeLayout
@@ -360,7 +364,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:includeFontPadding="false"
-                                android:text="@string/aadhar_card"
+                                android:text="@string/aadhar_card_astrics"
                                 android:textColor="@color/darkGray"
                                 android:textSize="18sp"
                                 app:fontFamily="@font/semi_bold"
@@ -550,10 +554,8 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_aadhar"
                                     android:imeOptions="actionNext"
-                                    android:inputType="number"
-                                    android:maxLength="12"
+                                    android:inputType="text"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.companyName}" />
 
@@ -575,10 +577,8 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_aadhar"
                                     android:imeOptions="actionNext"
-                                    android:inputType="number"
-                                    android:maxLength="12"
+                                    android:inputType="text"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.companyCinNumber}" />
 
@@ -600,10 +600,9 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_aadhar"
                                     android:imeOptions="actionNext"
-                                    android:inputType="number"
-                                    android:maxLength="12"
+                                    android:digits="@string/digits_name"
+                                    android:inputType="textPersonName"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.nameAsPerAadhar}" />
 
@@ -653,7 +652,7 @@
                                     android:layout_width="match_parent"
                                     android:cursorVisible="false"
                                     android:focusable="false"
-                                    android:inputType="date"
+                                    android:inputType="none"
                                     android:onClick="@{(view) -> listener.onSelectDateClick(context, DateOfBirthType.AADHAR, inputPersonAadharDob)}"
                                     android:text="@={viewModel.mDocumentsFormModel.dobAsPerAadhar}" />
 
@@ -818,7 +817,7 @@
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:focusable="false"
-                                    android:inputType="date"
+                                    android:inputType="none"
                                     android:onClick="@{() -> listener.onSelectDateClick(context, DateOfBirthType.PAN, inputPanDob)}"
                                     android:text="@={viewModel.mDocumentsFormModel.dobAsPerPan}" />
 
@@ -909,7 +908,6 @@
                                     android:digits="@string/digits_pan"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
-                                    android:maxLength="10"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.gstNumber}" />
 
@@ -1024,7 +1022,7 @@
                                     android:layout_width="match_parent"
                                     android:digits="@string/digits_name"
                                     android:imeOptions="actionDone"
-                                    android:inputType="text"
+                                    android:inputType="textPersonName"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.brnName}" />
 
@@ -1112,10 +1110,8 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_pan"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
-                                    android:maxLength="10"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.udhyamName}" />
 
@@ -1150,10 +1146,8 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_pan"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
-                                    android:maxLength="10"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.factoryNumber}" />
 
@@ -1245,7 +1239,6 @@
                                     android:digits="@string/digits_mobile"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:maxLength="16"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.fssaiNumber}" />
 
@@ -1298,7 +1291,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:includeFontPadding="false"
-                                android:text="Bank Account Details"
+                                android:text="@string/bank_account_details"
                                 android:textColor="@color/darkGray"
                                 android:textSize="18sp"
                                 app:fontFamily="@font/semi_bold"
@@ -1355,9 +1348,9 @@
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
-                                    android:digits="@string/digits_pan"
+                                    android:digits="@string/digits_name"
                                     android:imeOptions="actionNext"
-                                    android:inputType="text"
+                                    android:inputType="textPersonName"
                                     android:maxLength="10"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.bankAccountName}" />
@@ -1381,7 +1374,8 @@
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:imeOptions="actionDone"
-                                    android:inputType="textPersonName"
+                                    android:inputType="text"
+                                    android:digits="@string/digits_pan"
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.bankIFSC}" />
 
@@ -1454,7 +1448,7 @@
                                 app:layout_constraintTop_toBottomOf="@id/registered_address_txt" />
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_address_one"
+                                android:id="@+id/input_address_one_container"
                                 style="@style/ThemeInputTextLayout"
                                 android:layout_width="0dp"
                                 android:layout_marginStart="0dp"
@@ -1477,7 +1471,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_country"
+                                android:id="@+id/input_country_container"
                                 style="@style/ThemeInputTextLayout"
                                 android:layout_width="0dp"
                                 android:layout_marginStart="0dp"
@@ -1487,10 +1481,9 @@
                                 android:hint="@string/country"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_address_one">
+                                app:layout_constraintTop_toBottomOf="@id/input_address_one_container">
 
                                 <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                    android:id="@+id/etRegisterCountry"
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:cursorVisible="false"
@@ -1501,7 +1494,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_state"
+                                android:id="@+id/input_state_container"
                                 style="@style/ThemeInputTextLayout"
                                 android:layout_width="0dp"
                                 android:layout_marginStart="0dp"
@@ -1511,10 +1504,9 @@
                                 android:hint="@string/state"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_country">
+                                app:layout_constraintTop_toBottomOf="@id/input_country_container">
 
                                 <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                    android:id="@+id/etRegisterState"
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:cursorVisible="false"
@@ -1525,7 +1517,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_city"
+                                android:id="@+id/input_city_container"
                                 style="@style/ThemeInputTextLayout"
                                 android:layout_width="0dp"
                                 android:layout_marginStart="0dp"
@@ -1535,10 +1527,10 @@
                                 android:hint="@string/city"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_state">
+                                app:layout_constraintTop_toBottomOf="@id/input_state_container">
 
                                 <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                    android:id="@+id/etRegisterCity"
+                                    android:id="@+id/input_city"
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:cursorVisible="false"
@@ -1546,6 +1538,31 @@
                                     android:focusable="false"
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressCity}"
                                     app:dropDownMenu="@{cityList}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_tehsil_container"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/tehsil"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_city_container">
+
+                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/input_tehsil"
+                                    style="@style/ThemeEditText"
+                                    android:layout_width="match_parent"
+                                    android:cursorVisible="false"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
+                                    android:focusable="false"
+                                    android:text="@={viewModel.mDocumentsFormModel.registeredAddressTehsil}"
+                                    app:dropDownMenu="@{tehsilList}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1560,7 +1577,7 @@
                                 android:hint="@string/pin"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_city">
+                                app:layout_constraintTop_toBottomOf="@id/input_tehsil_container">
 
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
