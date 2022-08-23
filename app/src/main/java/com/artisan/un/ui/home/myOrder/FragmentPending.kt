@@ -1,27 +1,59 @@
-package com.yuwaah.view.opportunity
+package com.artisan.un.ui.home.myOrder
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.artisan.un.R
+import com.artisan.un.baseClasses.BaseFragment
 import com.artisan.un.databinding.ViewRecyclerviewBinding
-import com.artisan.un.ui.home.myOrder.OrderDetailActivity
-import com.artisan.un.ui.home.myOrder.OrderPendingRecyclerViewAdapter
-import com.artisan.un.utils.navigateTo
+import com.artisan.un.ui.order.viewmodel.OrderDetailsViewModel
+import com.artisan.un.utils.ApplicationData
 
-class FragmentPending : Fragment() {
-    private lateinit var mDataBinding: ViewRecyclerviewBinding
-    var mRecyclerViewAdapter = OrderPendingRecyclerViewAdapter(::onClick)
+class FragmentPending : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewModel>(R.layout.view_recyclerview, OrderDetailsViewModel::class) {
+    private var mRecyclerViewAdapter = OrderPendingRecyclerViewAdapter()
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private var totalAvailablePages: Int? = null
+    private var isInProgress: Boolean = false
+    private var currentPage: Int = 1
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        mDataBinding = ViewRecyclerviewBinding.inflate(inflater, container, false)
-        mDataBinding.recyclerView.adapter = mRecyclerViewAdapter
-        return mDataBinding.root
+    override fun onCreateView() {
+        linearLayoutManager = LinearLayoutManager(requireContext())
+        viewDataBinding.recyclerView.layoutManager = linearLayoutManager
+        viewDataBinding.recyclerView.adapter = mRecyclerViewAdapter
+        viewDataBinding.recyclerView.addOnScrollListener(ScrollListener())
+
+        observeData()
+        requestData(currentPage)
     }
 
-    private fun onClick(position: Int) {
-        requireActivity().navigateTo(OrderDetailActivity::class.java)
+    private fun observeData() {
+        mViewModel.mMyOrderListObservable.observe(viewLifecycleOwner) {
+            viewDataBinding.executePendingBindings()
+
+            it?.run {
+                isInProgress = false
+                totalAvailablePages = pagination?.last_page
+
+                if (currentPage == 1) mRecyclerViewAdapter.setData(
+                    order_list,
+                    currentPage == totalAvailablePages
+                )
+                else mRecyclerViewAdapter.addData(
+                    order_list,
+                    currentPage == totalAvailablePages
+                )
+            }
+        }
     }
 
+    private fun requestData(page: Int) {
+        isInProgress = true
+        mViewModel.requestMyOrderList(ApplicationData.user?.user?.id?.toInt() ?:0, page)
+    }
+
+    inner class ScrollListener: RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            if(linearLayoutManager.findLastVisibleItemPosition() == (mRecyclerViewAdapter.itemCount - 1) && !isInProgress && !mRecyclerViewAdapter.isBottomTouched)
+                requestData(++currentPage)
+        }
+    }
 }

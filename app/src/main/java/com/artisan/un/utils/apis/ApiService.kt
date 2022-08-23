@@ -155,4 +155,12 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/updatepassword")
     fun updatePassword(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-details")
+    fun getUserOrderDetails(@Field("order_id") order_id: Int): Observable<BaseResponse<OrderDetailsModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-list")
+    fun getOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
 }

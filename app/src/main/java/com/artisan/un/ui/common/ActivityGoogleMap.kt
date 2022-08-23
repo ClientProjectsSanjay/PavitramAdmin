@@ -53,7 +53,7 @@ class ActivityGoogleMap : BaseActivity<ActivityGoogleMapBinding, CommonViewModel
     /**
      * Once the map is ready move camera to the [latLng] with animation and display the formatted address on the screen.
      */
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
         this.googleMap?.setOnCameraIdleListener(CameraMoveListener())
 
@@ -71,7 +71,7 @@ class ActivityGoogleMap : BaseActivity<ActivityGoogleMapBinding, CommonViewModel
     private fun getLatLongFromAddress(formattedAddress: String) = run {
         val addressList = geocoder.getFromLocationName(formattedAddress, 1)
 
-        if(addressList.isNotEmpty()) {
+        if(addressList?.isNotEmpty() == true) {
             LatLng(addressList[0].latitude, addressList[0].longitude)
         } else {
             LatLng(DEFAULT_LAT, DEFAULT_LONG)
@@ -84,7 +84,7 @@ class ActivityGoogleMap : BaseActivity<ActivityGoogleMapBinding, CommonViewModel
     private fun getAddressFromLatLong(latLng: LatLng) : String = run {
         val addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
 
-        if(addressList.isNotEmpty()) {
+        if(addressList?.isNotEmpty() == true) {
             val addressFromGoogleMap = addressList[0]
             addressFromGoogleMap.getAddressLine(0)
         } else {

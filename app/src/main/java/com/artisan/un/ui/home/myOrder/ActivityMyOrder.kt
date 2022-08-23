@@ -23,8 +23,7 @@ class ActivityMyOrder : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mCreateOpportunityPagerAdapter =
-            CreateOpportunityPagerAdapter(childFragmentManager, lifecycle)
+        mCreateOpportunityPagerAdapter = CreateOpportunityPagerAdapter(childFragmentManager, lifecycle)
         mDataBinding.viewPager.adapter = mCreateOpportunityPagerAdapter
         TabLayoutMediator(mDataBinding.tabLayout, mDataBinding.viewPager) { tab, position ->
             tab.text = when (position) {

@@ -1,31 +1,22 @@
-package com.yuwaah.view.opportunity
+package com.artisan.un.ui.home.myOrder
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.artisan.un.R
+import com.artisan.un.baseClasses.BaseFragment
 import com.artisan.un.databinding.ViewRecyclerviewBinding
-import com.artisan.un.ui.home.myOrder.OrderDetailActivity
-import com.artisan.un.utils.navigateTo
-import com.yuwaah.view.opportunity.adapter.OrderCompletedRecyclerViewAdapter
+import com.artisan.un.ui.order.ActivityOrderDetails
+import com.artisan.un.ui.order.viewmodel.OrderDetailsViewModel
+import com.artisan.un.utils.ORDER_ID
 
-class FragmentCompleted : Fragment() {
-    private lateinit var mDataBinding: ViewRecyclerviewBinding
-    private val mRecyclerViewAdapter = OrderCompletedRecyclerViewAdapter(::onClick)
+class FragmentCompleted : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewModel>(R.layout.view_recyclerview, OrderDetailsViewModel::class) {
+    var mRecyclerViewAdapter = OrderCompletedRecyclerViewAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        mDataBinding = ViewRecyclerviewBinding.inflate(inflater, container, false)
-        mDataBinding.recyclerView.adapter = mRecyclerViewAdapter
-        return mDataBinding.root
-    }
-
-    private fun onClick(position: Int) {
-        requireActivity().navigateTo(OrderDetailActivity::class.java)
-
+    override fun onCreateView() {
+        viewDataBinding.recyclerView.adapter = mRecyclerViewAdapter
     }
 }

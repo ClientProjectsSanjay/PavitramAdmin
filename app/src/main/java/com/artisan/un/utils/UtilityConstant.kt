@@ -24,6 +24,7 @@ const val EDIT_PRODUCT = "editProduct"
 const val USER_ADDRESS = "userAddress"
 const val LATITUDE = "latitude"
 const val LONGITUDE = "longitude"
+const val ORDER_ID = "order_id"
 
 const val DEFAULT_COUNTRY_CODE = 101
 const val DEFAULT_STATE_CODE = 17

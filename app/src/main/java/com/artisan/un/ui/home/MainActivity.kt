@@ -27,14 +27,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(
     override fun onCreate() {
         viewDataBinding.listener = this
         viewDataBinding.addBarListener = this
-        viewDataBinding.profileImage = ApplicationData.user?.user?.profileImage
-        viewDataBinding.userName = ApplicationData.user?.user?.name ?: getString(R.string.app_name)
         viewDataBinding.version = BuildConfig.VERSION_NAME
 
         menuType = if(intent.getStringExtra(MENU_TYPE) == MenuType.PROFILE.name) MenuType.PROFILE else MenuType.HOME
 
         observeData()
         validateLanguage()
+        validateMenu(menuType)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewDataBinding.profileImage = ApplicationData.user?.user?.profileImage
+        viewDataBinding.userName = ApplicationData.user?.user?.name ?: getString(R.string.app_name)
+
         validateMenu(menuType)
     }
 
