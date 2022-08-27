@@ -162,5 +162,17 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("api/seller-order-list")
-    fun getOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+    fun getPendingOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-delivered-list")
+    fun getDeliveredOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-shipped-list")
+    fun getShippedOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-picked-list")
+    fun getPickedOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
 }

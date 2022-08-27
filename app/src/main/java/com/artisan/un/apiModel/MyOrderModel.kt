@@ -1,5 +1,9 @@
 package com.artisan.un.apiModel
 
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 data class MyOrderModel(
     val order_list: ArrayList<Order>,
     val pagination: Pagination?=null
@@ -19,4 +23,13 @@ data class Order(
     val order_status: String,
     val payment_status: String,
     val seller_name: String
-)
+) {
+    fun getOrderStatus(): String = run {
+        order_status.lowercase().let { it[0].uppercase() + it.substring(1) }
+    }
+
+    fun getOrderDate(): String = run {
+        val formattedDate: Date? = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.getDefault()).parse(order_date)
+        formattedDate?.let { SimpleDateFormat("yyyy-MM-dd | HH:mm:ss", Locale.getDefault()).format(it) } ?: ""
+    }
+}

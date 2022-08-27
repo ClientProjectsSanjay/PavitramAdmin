@@ -8,8 +8,8 @@ import com.artisan.un.databinding.ViewRecyclerviewBinding
 import com.artisan.un.ui.order.viewmodel.OrderDetailsViewModel
 import com.artisan.un.utils.ApplicationData
 
-class FragmentPending : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewModel>(R.layout.view_recyclerview, OrderDetailsViewModel::class) {
-    private var mRecyclerViewAdapter = OrderPendingRecyclerViewAdapter()
+class FragmentPicked : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewModel>(R.layout.view_recyclerview, OrderDetailsViewModel::class) {
+    private var mRecyclerViewAdapter = OrderPickedRecyclerViewAdapter()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var totalAvailablePages: Int? = null
     private var isInProgress: Boolean = false
@@ -35,7 +35,7 @@ class FragmentPending : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewMo
     }
 
     private fun observeData() {
-        mViewModel.mPendingOrderListObservable.observe(viewLifecycleOwner) {
+        mViewModel.mPickedOrderListObservable.observe(viewLifecycleOwner) {
             viewDataBinding.swipeRefreshLayout.isRefreshing = false
             viewDataBinding.executePendingBindings()
 
@@ -46,15 +46,21 @@ class FragmentPending : BaseFragment<ViewRecyclerviewBinding, OrderDetailsViewMo
                 isInProgress = false
                 totalAvailablePages = pagination?.last_page
 
-                if (currentPage == 1) mRecyclerViewAdapter.setData(order_list, currentPage == totalAvailablePages)
-                else mRecyclerViewAdapter.addData(order_list, currentPage == totalAvailablePages)
+                if (currentPage == 1) mRecyclerViewAdapter.setData(
+                    order_list,
+                    currentPage == totalAvailablePages
+                )
+                else mRecyclerViewAdapter.addData(
+                    order_list,
+                    currentPage == totalAvailablePages
+                )
             }
         }
     }
 
     private fun requestData(page: Int) {
         isInProgress = true
-        mViewModel.requestPendingOrderList(ApplicationData.user?.user?.id?.toInt() ?:0, page)
+        mViewModel.requestPickedOrderList(ApplicationData.user?.user?.id?.toInt() ?:0, page)
     }
 
     inner class ScrollListener: RecyclerView.OnScrollListener() {

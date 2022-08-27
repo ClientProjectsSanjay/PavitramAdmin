@@ -278,6 +278,14 @@
     <string name="select_an_address">Select an address</string>
     <string name="add_address">+ Add address</string>
     <string name="saved_addresses">Saved Addresses</string>
+    <string name="pending">Pending</string>
+    <string name="delivered">Delivered</string>
+    <string name="shipped">Shipped</string>
+    <string name="picked">Picked</string>
+    <string name="order_id_s">Order ID : %s</string>
+    <string name="total_amount_d">Total Amount : ₹%d</string>
+    <string name="order_status_">Order Status :</string>
+    <string name="order_data_not_found">Order Data Not Found</string>
 
     <array name="user_types">
         <item>Artisan</item>

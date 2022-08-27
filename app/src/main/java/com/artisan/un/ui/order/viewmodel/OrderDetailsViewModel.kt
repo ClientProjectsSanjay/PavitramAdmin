@@ -12,8 +12,17 @@ class OrderDetailsViewModel(private val apiService: ApiService) : BaseViewModel(
     private val mOrderDetailsLiveData = MutableLiveData<OrderDetailsModel>()
     val mOrderDetailsObservable: LiveData<OrderDetailsModel> = mOrderDetailsLiveData
 
-    private val mMyOrderListLiveData = MutableLiveData<MyOrderModel>()
-    val mMyOrderListObservable: LiveData<MyOrderModel> = mMyOrderListLiveData
+    private val mPendingOrderListLiveData = MutableLiveData<MyOrderModel>()
+    val mPendingOrderListObservable: LiveData<MyOrderModel> = mPendingOrderListLiveData
+
+    private val mDeliveredOrderListLiveData = MutableLiveData<MyOrderModel>()
+    val mDeliveredOrderListObservable: LiveData<MyOrderModel> = mDeliveredOrderListLiveData
+
+    private val mShippedOrderListLiveData = MutableLiveData<MyOrderModel>()
+    val mShippedOrderListObservable: LiveData<MyOrderModel> = mShippedOrderListLiveData
+
+    private val mPickedOrderListLiveData = MutableLiveData<MyOrderModel>()
+    val mPickedOrderListObservable: LiveData<MyOrderModel> = mPickedOrderListLiveData
 
     fun getUserOrderDetails(orderId: Int) {
         requestData(
@@ -24,14 +33,47 @@ class OrderDetailsViewModel(private val apiService: ApiService) : BaseViewModel(
         )
     }
 
-    fun requestMyOrderList(userId: Int, page: Int) {
+    fun requestPendingOrderList(userId: Int, page: Int) {
         val map = HashMap<String, Any>()
         map["page"] = page
         map["user_id"] = userId
 
         requestData(
-            api = apiService.getOrderList(map),
-            success = { response -> response.data?.let { mMyOrderListLiveData.postValue(it) } }
+            api = apiService.getPendingOrderList(map),
+            success = { response -> response.data?.let { mPendingOrderListLiveData.postValue(it) } }
+        )
+    }
+
+    fun requestDeliveredOrderList(userId: Int, page: Int) {
+        val map = HashMap<String, Any>()
+        map["page"] = page
+        map["user_id"] = userId
+
+        requestData(
+            api = apiService.getDeliveredOrderList(map),
+            success = { response -> response.data?.let { mDeliveredOrderListLiveData.postValue(it) } }
+        )
+    }
+
+    fun requestShippedOrderList(userId: Int, page: Int) {
+        val map = HashMap<String, Any>()
+        map["page"] = page
+        map["user_id"] = userId
+
+        requestData(
+            api = apiService.getShippedOrderList(map),
+            success = { response -> response.data?.let { mShippedOrderListLiveData.postValue(it) } }
+        )
+    }
+
+    fun requestPickedOrderList(userId: Int, page: Int) {
+        val map = HashMap<String, Any>()
+        map["page"] = page
+        map["user_id"] = userId
+
+        requestData(
+            api = apiService.getPickedOrderList(map),
+            success = { response -> response.data?.let { mPickedOrderListLiveData.postValue(it) } }
         )
     }
 }

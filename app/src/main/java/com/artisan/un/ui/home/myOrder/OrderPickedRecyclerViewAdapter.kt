@@ -1,6 +1,5 @@
 package com.artisan.un.ui.home.myOrder
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,11 +10,10 @@ import com.artisan.un.databinding.ItemPendingBinding
 import com.artisan.un.ui.order.ActivityOrderDetails
 import com.artisan.un.utils.ORDER_ID
 
-class OrderPendingRecyclerViewAdapter : BaseRecyclerViewAdapter() {
+class OrderPickedRecyclerViewAdapter : BaseRecyclerViewAdapter() {
     private var dataList = ArrayList<Order>()
     var isBottomTouched: Boolean = false
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: ArrayList<Order>, isLast: Boolean = true) {
         this.isBottomTouched = isLast
         this.dataList.clear()
