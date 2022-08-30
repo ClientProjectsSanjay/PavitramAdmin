@@ -11,7 +11,7 @@ import com.artisan.un.databinding.ItemPendingBinding
 import com.artisan.un.ui.order.ActivityOrderDetails
 import com.artisan.un.utils.ORDER_ID
 
-class OrderPendingRecyclerViewAdapter : BaseRecyclerViewAdapter() {
+class OrderPendingRecyclerViewAdapter(val onPendingClick: (Int) -> Unit) : BaseRecyclerViewAdapter() {
     private var dataList = ArrayList<Order>()
     var isBottomTouched: Boolean = false
 
@@ -38,12 +38,17 @@ class OrderPendingRecyclerViewAdapter : BaseRecyclerViewAdapter() {
 
     inner class ProductListItemHolder(val viewDataBinding : ItemPendingBinding) : BaseViewHolder(viewDataBinding) {
         override fun bindData() {
-            viewDataBinding.order = dataList[adapterPosition]
+            val orderData = dataList[adapterPosition]
+            viewDataBinding.order = orderData
 
-            viewDataBinding.root.setOnClickListener {
+            viewDataBinding.viewBtn.setOnClickListener {
                 val intent = Intent(it.context, ActivityOrderDetails::class.java)
-                intent.putExtra(ORDER_ID, dataList[adapterPosition].order_id)
+                intent.putExtra(ORDER_ID, orderData.order_id)
                 it.context.startActivity(intent)
+            }
+
+            viewDataBinding.shippedBtn.setOnClickListener {
+                onPendingClick(orderData.order_id)
             }
         }
     }

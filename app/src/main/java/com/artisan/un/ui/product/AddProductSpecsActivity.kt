@@ -186,6 +186,8 @@ class AddProductSpecsActivity : BaseActivity<ActivityAddProductSpecsBinding, Pro
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if(requestCode == cameraRequestCode) {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getPicturesFileUri(CAMERA_CAPTURED_PRODUCT_NAME)?.let {

@@ -101,10 +101,11 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/orange</item>
     </style>
+    
     <style name="TabLayoutTextAppearance" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">#f0f7f4</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
     </style>
-
+    
 </resources>

@@ -22,7 +22,17 @@ data class Order(
     val order_id: Int,
     val order_status: String,
     val payment_status: String,
-    val seller_name: String
+    val seller_name: String,
+    val applied_weight: String,
+    val awb_code: String,
+    val shipment_id: String,
+    val courier_name: String,
+    val package_length: String,
+    val package_breadth: String,
+    val package_height: String,
+    val package_weight: String,
+    val label_url: String?,
+    val manifest_url: String?,
 ) {
     fun getOrderStatus(): String = run {
         order_status.lowercase().let { it[0].uppercase() + it.substring(1) }

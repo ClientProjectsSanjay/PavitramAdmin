@@ -16,12 +16,8 @@ import com.artisan.un.ui.product.AddProductBasicActivity
 import com.artisan.un.ui.userauth.ActivityLogin
 import com.artisan.un.ui.userauth.viewModel.LoginViewModel
 import com.artisan.un.utils.*
-import com.artisan.un.utils.apis.UserInfo
 
-class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(
-    R.layout.activity_main,
-    LoginViewModel::class
-), DrawerListener, AppBarListener {
+class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(R.layout.activity_main, LoginViewModel::class), DrawerListener, AppBarListener {
     private var menuType: MenuType? = null
 
     override fun onCreate() {
@@ -40,8 +36,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(
         super.onResume()
         viewDataBinding.profileImage = ApplicationData.user?.user?.profileImage
         viewDataBinding.userName = ApplicationData.user?.user?.name ?: getString(R.string.app_name)
-
-        validateMenu(menuType)
     }
 
     private fun observeData() {

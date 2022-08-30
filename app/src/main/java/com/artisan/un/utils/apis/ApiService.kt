@@ -175,4 +175,12 @@ interface ApiService {
     @FormUrlEncoded
     @POST("api/seller-order-picked-list")
     fun getPickedOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-package-handover")
+    fun markPackageHandover(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-shipping-request")
+    fun markPackageShipped(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 }

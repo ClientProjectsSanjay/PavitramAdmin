@@ -24,6 +24,12 @@ class OrderDetailsViewModel(private val apiService: ApiService) : BaseViewModel(
     private val mPickedOrderListLiveData = MutableLiveData<MyOrderModel>()
     val mPickedOrderListObservable: LiveData<MyOrderModel> = mPickedOrderListLiveData
 
+    private val mHandoverResponseLiveData = MutableLiveData<String>()
+    val mHandoverResponseObservable: LiveData<String> = mHandoverResponseLiveData
+
+    private val mShippedResponseLiveData = MutableLiveData<String>()
+    val mShippedResponseObservable: LiveData<String> = mShippedResponseLiveData
+
     fun getUserOrderDetails(orderId: Int) {
         requestData(
             api = apiService.getUserOrderDetails(orderId),
@@ -74,6 +80,35 @@ class OrderDetailsViewModel(private val apiService: ApiService) : BaseViewModel(
         requestData(
             api = apiService.getPickedOrderList(map),
             success = { response -> response.data?.let { mPickedOrderListLiveData.postValue(it) } }
+        )
+    }
+
+    fun markPackageHandover(userId: Int, orderId: Int) {
+        val map = HashMap<String, Any>()
+        map["user_id"] = userId
+        map["order_id"] = orderId
+
+        requestData(
+            api = apiService.markPackageHandover(map),
+            success = { response -> mHandoverResponseLiveData.postValue(response.message) },
+            priority = ApiService.PRIORITY_HIGH,
+            errorPriority = ErrorPriority.MEDIUM,
+        )
+    }
+
+    fun markPackageShipped(orderId: Int, length: Float, breadth: Float, height: Float, weight: Float) {
+        val map = HashMap<String, Any>()
+        map["order_id"] = orderId
+        map["package_length"] = length
+        map["package_breadth"] = breadth
+        map["package_height"] = height
+        map["package_weight"] = weight
+
+        requestData(
+            api = apiService.markPackageShipped(map),
+            success = { response -> mShippedResponseLiveData.postValue(response.message) },
+            priority = ApiService.PRIORITY_HIGH,
+            errorPriority = ErrorPriority.MEDIUM,
         )
     }
 }

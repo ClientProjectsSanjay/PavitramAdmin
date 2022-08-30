@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Seller Pavitram</string>
-
     <string name="digits_mobile" translatable="false">0123456789</string>
     <string name="digits_aadhar" translatable="false">0123456789</string>
     <string name="digits_pan" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
@@ -51,15 +50,11 @@
     <string name="upload_underline"><u>Upload</u></string>
     <string name="pan_card">PAN Card</string>
     <string name="bank">Bank</string>
-
     <string name="bank_account_name">Account Holder Name</string>
     <string name="bank_account_number">Account Number</string>
     <string name="bank_account_ifsc_code">Ifsc Code</string>
     <string name="bank_account_gst">GST</string>
     <string name="bank_account_ffcc">FSSAI Licance Number</string>
-
-
-
     <string name="pan_card_number">PAN Card Number</string>
     <string name="name_as_per_pan">Name As Per PAN</string>
     <string name="dob_as_per_pan">DOB As Per PAN</string>
@@ -117,7 +112,6 @@
     <string name="invalid_mobile_or_email">Invalid Mobile No/Email Id</string>
     <string name="aadhar_information_required">Aadhar Information Required</string>
     <string name="bank_information_required">Bank Information Required</string>
-
     <string name="pan_information_required">PAN Information Required</string>
     <string name="brn_information_required">BRN Information Required</string>
     <string name="registered_address_required">Registered Address Required</string>
@@ -286,6 +280,24 @@
     <string name="total_amount_d">Total Amount : ₹%d</string>
     <string name="order_status_">Order Status :</string>
     <string name="order_data_not_found">Order Data Not Found</string>
+    <string name="applied_weight_s">Applied Weight : %s</string>
+    <string name="awb_code_s">AWB Code : %s</string>
+    <string name="shipment_no_s">Shipment No. : %s</string>
+    <string name="courier_name_s">Courier Name : %s</string>
+    <string name="handover">Handover</string>
+    <string name="mark">Mark</string>
+    <string name="_label">Label</string>
+    <string name="manifest">Manifest</string>
+    <string name="shipping_request">Shipping Request</string>
+    <string name="weight_kgs">Weight(kgs)</string>
+    <string name="length_cms">Length(cms)</string>
+    <string name="breadth_cms">Breadth(cms)</string>
+    <string name="height_cms">Height(cms)</string>
+    <string name="submit">Submit</string>
+    <string name="enter_shipment_weight">Enter shipment weight</string>
+    <string name="enter_shipment_length">Enter shipment length</string>
+    <string name="enter_shipment_height">Enter shipment height</string>
+    <string name="enter_shipment_breadth">Enter shipment breadth</string>
 
     <array name="user_types">
         <item>Artisan</item>
