@@ -104,7 +104,8 @@
                         android:cursorVisible="false"
                         android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
                         android:focusable="false"
-                        android:text="@string/karnataka" />
+                        android:text="@={ address.state }"
+                        app:dropDownMenu="@{ viewModel.stateNameList }" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,28 +128,6 @@
                         android:singleLine="true"
                         android:text="@={ address.district }"
                         app:dropDownMenu="@{ viewModel.cityNameList }" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/ThemeInputTextLayout"
-                    android:layout_width="match_parent"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="0dp"
-                    android:hint="@string/taluk">
-
-                    <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                        android:id="@+id/input_tahsil"
-                        style="@style/ThemeEditText"
-                        android:layout_width="match_parent"
-                        android:cursorVisible="false"
-                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                        android:focusable="false"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true"
-                        android:text="@={ address.tehsil }"
-                        app:dropDownMenu="@{ viewModel.tehsilNameList }" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

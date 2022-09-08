@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Seller Pavitram</string>
-
     <string name="digits_mobile" translatable="false">0123456789</string>
     <string name="digits_aadhar" translatable="false">0123456789</string>
     <string name="digits_pan" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
@@ -53,15 +52,11 @@
     <string name="upload_underline"><u>Upload</u></string>
     <string name="pan_card">PAN Card</string>
     <string name="bank">Bank</string>
-
     <string name="bank_account_name">Account Holder Name</string>
     <string name="bank_account_number">Account Number</string>
     <string name="bank_account_ifsc_code">IFSC Code</string>
     <string name="bank_account_gst">GST</string>
     <string name="bank_account_ffcc">FSSAI Licance Number</string>
-
-
-
     <string name="pan_card_number">PAN Card Number</string>
     <string name="name_as_per_pan">Name As Per PAN</string>
     <string name="dob_as_per_pan">DOB As Per PAN</string>
@@ -277,31 +272,50 @@
     <string name="shg_details">SHG Details</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="quantity_update">Quantity Update</string>
+    <string name="add_value">Add Value</string>
+    <string name="order_details">Order Details</string>
     <string name="user_information">User Information</string>
     <string name="call">Call</string>
-    <string name="email">Email</string>
     <string name="seller_information">Seller Information</string>
-    <string name="order_details">Order Details</string>
+    <string name="email">Email</string>
     <string name="payment_details">Payment Details</string>
     <string name="payment_status">Payment Status</string>
+    <string name="purchased_item_details">Purchased Item Details</string>
     <string name="delivery_date">Delivery Date</string>
     <string name="purchase_date">Purchase Date</string>
-    <string name="purchased_item_details">Purchased Item Details</string>
     <string name="quantity">Quantity</string>
     <string name="sub_total">Sub Total</string>
-    <string name="fssai">FSSAI</string>
-    <string name="registration_license_number">Registration/License Number</string>
-    <string name="gst_registration_details">GST Registration Details</string>
-    <string name="msme_registration_details">MSME Registration Details</string>
-    <string name="gst_number">GST Card Number</string>
-    <string name="udhyam_registration_name">Udhyam Registration Name</string>
-    <string name="factiry_licence_number">Factory Licence Number</string>
-    <string name="company_details">Company Details <a style="color:#E53935">*</a></string>
-    <string name="company_name">Company Name</string>
-    <string name="authorized_person_aadhar_number">Authorized Person Aadhar Card Number</string>
-    <string name="upload_supporting_file">Upload supporting file</string>
-    <string name="tehsil">Tehsil</string>
-    <string name="bank_account_details">Bank Account Details <a style="color:#E53935">*</a></string>
+    <string name="select_an_address">Select an address</string>
+    <string name="add_address">+ Add address</string>
+    <string name="saved_addresses">Saved Addresses</string>
+    <string name="pending">Pending</string>
+    <string name="delivered">Delivered</string>
+    <string name="shipped">Shipped</string>
+    <string name="picked">Picked</string>
+    <string name="order_id_s">Order ID : %s</string>
+    <string name="total_amount_d">Total Amount : ₹%d</string>
+    <string name="order_status_">Order Status :</string>
+    <string name="order_data_not_found">Order Data Not Found</string>
+    <string name="applied_weight_s">Applied Weight : %s</string>
+    <string name="awb_code_s">AWB Code : %s</string>
+    <string name="shipment_no_s">Shipment No. : %s</string>
+    <string name="courier_name_s">Courier Name : %s</string>
+    <string name="handover">Handover</string>
+    <string name="mark">Mark</string>
+    <string name="_label">Label</string>
+    <string name="manifest">Manifest</string>
+    <string name="shipping_request">Shipping Request</string>
+    <string name="weight_kgs">Weight(kgs)</string>
+    <string name="length_cms">Length(cms)</string>
+    <string name="breadth_cms">Breadth(cms)</string>
+    <string name="height_cms">Height(cms)</string>
+    <string name="submit">Submit</string>
+    <string name="enter_shipment_weight">Enter shipment weight</string>
+    <string name="enter_shipment_length">Enter shipment length</string>
+    <string name="enter_shipment_height">Enter shipment height</string>
+    <string name="enter_shipment_breadth">Enter shipment breadth</string>
+    <string name="enter_a_valid_quantity">Enter a valid quantity</string>
 
     <array name="user_types">
         <item>Artisan</item>

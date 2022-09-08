@@ -2,6 +2,7 @@ package com.artisan.un.utils
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -278,7 +279,17 @@ fun Activity.getPicturesFileUri(fileName: String): Uri? = run {
     }
 }
 
-@BindingAdapter(value = ["app:hint", "app:file"], requireAll = true)
-fun CustomTextView.setFileNameAndHint(hint: String?, file: File?) {
-    text = file?.let { file.name } ?: run { hint ?: context.getString(R.string.upload_supporting_file) }
+fun Activity.downloadFile(url: String?) {
+    url?.let {
+        val lastSeparatorIndex = it.lastIndexOf(".")
+        val mimeType =  it.substring(lastSeparatorIndex + 1)
+        val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val downloadManagerRequest = DownloadManager.Request(Uri.parse(it))
+        downloadManagerRequest.setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOWNLOADS,
+            "${getString(R.string.app_name)}_${Date().time}.$mimeType"
+        )
+        downloadManagerRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        downloadManager.enqueue(downloadManagerRequest)
+    }
 }

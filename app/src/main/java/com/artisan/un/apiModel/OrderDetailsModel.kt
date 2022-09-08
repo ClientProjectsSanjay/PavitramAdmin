@@ -1,5 +1,6 @@
 package com.artisan.un.apiModel
 
+import java.util.*
 import kotlin.collections.ArrayList
 
 data class OrderDetailsModel(
@@ -46,7 +47,7 @@ data class OrderDetailsOrderData(
     val paymentStatus: String,
     val deliveryDate: String,
     val purchaseDate: String,
-    val deliveryCharge: Float,
+    val deliveryCharge: String,
     val productItem: ArrayList<OrderDetailsProductItem>,
 ) {
     fun getFormattedStatus(): String {
@@ -58,7 +59,7 @@ data class OrderDetailsOrderData(
     }
 
     fun getGrandeTotal(): String {
-        return String.format("%.2f", productItem.map { it.productPrice*it.productQty }.reduce { first, second -> first+second} + deliveryCharge)
+        return String.format("%.2f", productItem.map { it.productPrice*it.productQty }.reduce { first, second -> first+second} + deliveryCharge.toFloat())
     }
 }
 

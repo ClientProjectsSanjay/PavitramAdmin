@@ -8,13 +8,14 @@ import com.artisan.un.apiModel.SubCategoryWiseProductListModel
 import com.artisan.un.baseClasses.BaseRecyclerViewAdapter
 import com.artisan.un.baseClasses.BaseViewHolder
 import com.artisan.un.databinding.ViewProductListingBinding
+import com.artisan.un.ui.home.viewModel.HomeViewModel
 import com.artisan.un.ui.product.SubCategoryActivity
 import com.artisan.un.utils.PAGE_TITLE
 import com.artisan.un.utils.SUB_CATEGORY_ID
 import com.artisan.un.utils.navigateTo
 import com.artisan.un.utils.recyclerViewDecoration.AllSideDecoration
 
-class SubCategoryProductAdapter : BaseRecyclerViewAdapter() {
+class SubCategoryProductAdapter(val viewModel: HomeViewModel) : BaseRecyclerViewAdapter() {
     private var dataListModel: ArrayList<SubCategoryWiseProductListModel>? = null
 
     fun setData(dataListModel: ArrayList<SubCategoryWiseProductListModel>?) {
@@ -32,7 +33,7 @@ class SubCategoryProductAdapter : BaseRecyclerViewAdapter() {
         override fun bindData() {
             dataListModel?.get(adapterPosition)?.let {
                 val context = viewDataBinding.root.context
-                val adapter = HorizontalProductAdapter()
+                val adapter = HorizontalProductAdapter(viewModel)
                 adapter.setData(it.products)
 
                 viewDataBinding.title = it.subCategoryName

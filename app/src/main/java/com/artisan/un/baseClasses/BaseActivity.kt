@@ -34,7 +34,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>(private val 
         super.onCreate(savedInstanceState)
         progressBar = ProgressBarDialog.createDialog(this)
 
-        mViewModel = getViewModel(aClass)
+        mViewModel = getViewModel(clazz = aClass)
         viewDataBinding = DataBindingUtil.setContentView(this, resourceId)
         viewDataBinding.lifecycleOwner = this
         observerData()

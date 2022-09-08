@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="image"
             type="String" />
@@ -23,6 +24,10 @@
         <variable
             name="isActive"
             type="Boolean" />
+
+        <variable
+            name="availableCount"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -52,68 +57,159 @@
                 android:id="@+id/product_status_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:gravity="center|top"
                 android:includeFontPadding="false"
                 android:lines="1"
                 android:maxLines="1"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:text="@{isActive?@string/active:@string/inactive}"
-                android:textColor="@{isActive?@color/green:@color/red}"
+                android:textColor="@{isActive?@color/green:@color/red, default=@color/green}"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/product_img"
-                app:layout_constraintTop_toBottomOf="@id/product_img" />
+                app:layout_constraintTop_toBottomOf="@id/product_img"
+                tools:text="Active" />
 
             <com.artisan.un.utils.customView.CustomTextView
                 android:id="@+id/product_code_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
                 android:includeFontPadding="false"
                 android:lines="1"
                 android:maxLines="1"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:text="@{ productCode }"
-                android:textSize="12sp"
                 android:textColor="@color/orange"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/product_img" />
+                app:layout_constraintTop_toBottomOf="@id/product_img"
+                tools:text="Pdx ID 00009" />
 
             <com.artisan.un.utils.customView.CustomTextView
                 android:id="@+id/product_name_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:ellipsize="end"
-                android:gravity="top"
+                android:gravity="top|start"
                 android:includeFontPadding="false"
                 android:lines="2"
                 android:maxLines="2"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="4dp"
                 android:text="@{ title }"
                 android:textColor="@color/darkGray"
+                app:fontFamily="@font/semi_bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/product_status_txt"
-                app:layout_constraintTop_toBottomOf="@id/product_status_txt" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_status_txt"
+                tools:text="Hand Embrodery" />
 
             <com.artisan.un.utils.customView.CustomTextView
                 android:id="@+id/price_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="start"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:includeFontPadding="false"
                 android:text="@{ `₹` + price }"
                 android:textColor="@color/darkGray"
-                app:font_name="bold"
-                app:layout_constraintEnd_toEndOf="@id/product_name_txt"
-                app:layout_constraintStart_toStartOf="@id/product_name_txt"
-                app:layout_constraintTop_toBottomOf="@id/product_name_txt" />
+                app:fontFamily="@font/bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_name_txt"
+                tools:text="₹1,195.00" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/update_count_btn_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_green_corner_round_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price_txt">
+
+                <TextView
+                    android:id="@+id/available_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@string/available"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/light"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toTopOf="@id/available_value"
+                    app:layout_constraintEnd_toStartOf="@id/divider_view"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/available_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@{availableCount + `pcs`}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/light"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/divider_view"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/available_txt"
+                    tools:text="100pcs" />
+
+                <View
+                    android:id="@+id/divider_view"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/update_btn"
+                    app:layout_constraintStart_toEndOf="@id/available_txt"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/update_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@string/update"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/semi_bold"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/divider_view"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

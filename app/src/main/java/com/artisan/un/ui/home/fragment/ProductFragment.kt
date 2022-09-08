@@ -9,11 +9,10 @@ import com.artisan.un.databinding.FragmentRecyclerViewBinding
 import com.artisan.un.ui.home.adapter.HomePageAdapter
 import com.artisan.un.ui.home.viewModel.HomeViewModel
 import com.artisan.un.utils.ApplicationData
-import com.artisan.un.utils.Roles
 import com.artisan.un.utils.toPx
 
 class ProductFragment : BaseFragment<FragmentRecyclerViewBinding, HomeViewModel>(R.layout.fragment_recycler_view, HomeViewModel::class) {
-    private val homeAdapter = HomePageAdapter()
+    private lateinit var homeAdapter: HomePageAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private var totalAvailablePages: Int? = null
@@ -23,6 +22,7 @@ class ProductFragment : BaseFragment<FragmentRecyclerViewBinding, HomeViewModel>
     override fun onCreateView() {
         linearLayoutManager = LinearLayoutManager(this.context)
 
+        homeAdapter = HomePageAdapter(mViewModel)
         viewDataBinding.viewModel = mViewModel
         viewDataBinding.recyclerView.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.page_bg_color))
         viewDataBinding.recyclerView.layoutManager = linearLayoutManager
@@ -88,6 +88,11 @@ class ProductFragment : BaseFragment<FragmentRecyclerViewBinding, HomeViewModel>
             viewDataBinding.swipeRefresh.isRefreshing = false
             viewDataBinding.message = it.message
             viewDataBinding.isLoading = false
+        }
+
+        mViewModel.mQuantityUpdateObservable.observe(viewLifecycleOwner) {
+            currentPage=1
+            requestData(currentPage)
         }
     }
 

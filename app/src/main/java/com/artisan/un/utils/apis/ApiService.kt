@@ -137,6 +137,10 @@ interface ApiService {
     fun updateUserProfile(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 
     @FormUrlEncoded
+    @POST("api/update-product-qty")
+    fun updateProductQuantity(@Field("product_id") productId: Int, @Field("qty") quantity: Int): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
     @POST("api/updatemobile")
     fun updateMobile(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 
@@ -157,10 +161,30 @@ interface ApiService {
     fun updatePassword(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 
     @FormUrlEncoded
-    @POST("api/seller-order-list")
-    fun getSellerOrderList(@Field("user_id") user_id: Int): Observable<BaseResponse<MyOrderModel>>
+    @POST("api/seller-order-details")
+    fun getUserOrderDetails(@Field("order_id") order_id: Int): Observable<BaseResponse<OrderDetailsModel>>
 
     @FormUrlEncoded
-    @POST("api/seller-order-details")
-    fun getSellerOrderDetails(@Field("order_id") order_id: Int): Observable<BaseResponse<OrderDetailsModel>>
+    @POST("api/seller-order-list")
+    fun getPendingOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-delivered-list")
+    fun getDeliveredOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-shipped-list")
+    fun getShippedOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-picked-list")
+    fun getPickedOrderList(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<MyOrderModel>>
+
+    @FormUrlEncoded
+    @POST("api/seller-package-handover")
+    fun markPackageHandover(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
+    @POST("api/seller-order-shipping-request")
+    fun markPackageShipped(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 }

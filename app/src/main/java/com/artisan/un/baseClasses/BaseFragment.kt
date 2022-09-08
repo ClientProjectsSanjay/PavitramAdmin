@@ -34,12 +34,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel>(private val 
 
         viewDataBinding = DataBindingUtil.inflate(inflater, resourceId, container, false)
         viewDataBinding.lifecycleOwner = this
-        mViewModel = getViewModel(aClass)
+        mViewModel = getViewModel(clazz = aClass)
         onCreateView()
         observerData()
 
         viewDataBinding.root
-
     }
 
     private fun observerData() {

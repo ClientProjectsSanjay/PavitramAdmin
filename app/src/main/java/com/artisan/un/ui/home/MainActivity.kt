@@ -16,19 +16,13 @@ import com.artisan.un.ui.product.AddProductBasicActivity
 import com.artisan.un.ui.userauth.ActivityLogin
 import com.artisan.un.ui.userauth.viewModel.LoginViewModel
 import com.artisan.un.utils.*
-import com.artisan.un.utils.apis.UserInfo
 
-class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(
-    R.layout.activity_main,
-    LoginViewModel::class
-), DrawerListener, AppBarListener {
+class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(R.layout.activity_main, LoginViewModel::class), DrawerListener, AppBarListener {
     private var menuType: MenuType? = null
 
     override fun onCreate() {
         viewDataBinding.listener = this
         viewDataBinding.addBarListener = this
-        viewDataBinding.profileImage = ApplicationData.user?.user?.profileImage
-        viewDataBinding.userName = ApplicationData.user?.user?.name ?: getString(R.string.app_name)
         viewDataBinding.version = BuildConfig.VERSION_NAME
 
         menuType = if(intent.getStringExtra(MENU_TYPE) == MenuType.PROFILE.name) MenuType.PROFILE else MenuType.HOME
@@ -36,6 +30,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, LoginViewModel>(
         observeData()
         validateLanguage()
         validateMenu(menuType)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewDataBinding.profileImage = ApplicationData.user?.user?.profileImage
+        viewDataBinding.userName = ApplicationData.user?.user?.name ?: getString(R.string.app_name)
     }
 
     private fun observeData() {

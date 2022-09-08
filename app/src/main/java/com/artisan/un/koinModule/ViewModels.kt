@@ -2,6 +2,7 @@ package com.artisan.un.koinModule
 
 import com.artisan.un.baseClasses.CommonViewModel
 import com.artisan.un.ui.home.viewModel.*
+import com.artisan.un.ui.order.viewmodel.OrderDetailsViewModel
 import com.artisan.un.ui.product.viewModel.*
 import com.artisan.un.ui.userauth.viewModel.*
 import com.artisan.un.ui.home.myOrder.viewmodel.OrderDetailsViewModel
@@ -26,6 +27,5 @@ val myViewModel = module {
     viewModel { ProductViewModel(get()) }
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { OrderDetailsViewModel(get()) }
-    viewModel { OrderListViewModel(get()) }
 }
 

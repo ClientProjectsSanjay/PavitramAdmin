@@ -28,7 +28,6 @@ class MyApp : MultiDexApplication() {
             androidLogger()
             androidContext(this@MyApp)
             koin.loadModules(listOf(appModule, networkModule, myViewModel))
-            koin.createRootScope()
         }
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener {

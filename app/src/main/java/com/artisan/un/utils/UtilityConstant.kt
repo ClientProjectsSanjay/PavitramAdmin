@@ -22,6 +22,7 @@ const val USER_ADDRESS = "userAddress"
 const val ORDER_ID = "order_id"
 const val LATITUDE = "latitude"
 const val LONGITUDE = "longitude"
+const val ORDER_ID = "order_id"
 
 const val DOC_AADHAR = "docAadhar"
 const val DOC_COMPANY = "docCompany"

@@ -80,6 +80,7 @@ data class ProductData(
     var name: String? = null,
     var price: String? = null,
     var id: Int? = null,
+    var qty: String? = null,
     var is_active: Int? = null,
     var image_1: String? = null,
     var template: TemplateDataModel? = null,
