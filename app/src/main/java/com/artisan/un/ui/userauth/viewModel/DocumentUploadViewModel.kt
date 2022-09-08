@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.artisan.un.apiModel.DocumentsFormDataModel
 import com.artisan.un.baseClasses.BaseViewModel
 import com.artisan.un.utils.DEFAULT_COUNTRY_CODE
-import com.artisan.un.utils.DEFAULT_STATE_CODE
 import com.artisan.un.utils.apis.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -14,7 +13,6 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
     init {
         getCountries()
         getState()
-        getCity()
     }
 
     val mDocumentsFormModel = MutableLiveData(DocumentsFormDataModel())
@@ -31,18 +29,15 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
     private val mCityLiveData = MutableLiveData<ArrayList<CityData>>()
     val mCityDataObservable: LiveData<ArrayList<CityData>> = mCityLiveData
 
-    private val mTehsilLiveData = MutableLiveData<ArrayList<TehsilData>>()
-    val mTehsilDataObservable: LiveData<ArrayList<TehsilData>> = mTehsilLiveData
-
     private val mUserResponse = MutableLiveData<UserResponse>()
     val mUserResponseObservable: LiveData<UserResponse> = mUserResponse
 
     private fun getCountries() {
         requestData(
-            apis.getCountries(), {
-                mCountryLiveData.postValue(it.data?.country)
+            apis.getCountries(), { response ->
+                response.data?.country?.let { mCountryLiveData.postValue(it) }
 
-                it.data?.country?.find { country -> country.id == DEFAULT_COUNTRY_CODE }?.let { country ->
+                response.data?.country?.find { country -> country.id == DEFAULT_COUNTRY_CODE }?.let { country ->
                     mDocumentsFormModel.postValue(mDocumentsFormModel.value?.apply { registeredAddressCountry = country.name })
                 }
             },
@@ -53,33 +48,22 @@ class DocumentUploadViewModel(private val apis: ApiService) : BaseViewModel() {
         val map = HashMap<String, Any>()
         map["country_id"] = DEFAULT_COUNTRY_CODE
 
-        requestData(apis.getState(map), {
-            mStateLiveData.postValue(it.data?.states)
-
-            it.data?.states?.find { state -> state.id == DEFAULT_STATE_CODE }?.let { state ->
-                mDocumentsFormModel.postValue(mDocumentsFormModel.value?.apply { registeredAddressState = state.name })
-            }
+        requestData(apis.getState(map), { response ->
+            response.data?.states?.let { mStateLiveData.postValue(it) }
         })
     }
 
-    private fun getCity() {
+    fun getCity(stateId: Int) {
         val map = HashMap<String, Any>()
-        map["state_id"] = DEFAULT_STATE_CODE
+        map["state_id"] = stateId
 
-        requestData(apis.getCity(map), {
-            mCityLiveData.postValue(it.data?.district)
+        requestData(apis.getCity(map), { response ->
+            response.data?.district?.let { mCityLiveData.postValue(it) }
         })
-    }
-
-    fun getTehsil(city_id: Int) {
-        val map = HashMap<String, Any>()
-        map["city_id"] = city_id
-
-        requestData(apis.getTehsil(map), { mTehsilLiveData.postValue(it.data?.tehsil) })
     }
 
     fun requestUserProfile() {
-        requestData(apis.getProfile(), { mUserResponse.postValue(it.data) }, priority = ApiService.PRIORITY_HIGH)
+        requestData(apis.getProfile(), { response -> response.data?.let { mUserResponse.postValue(it) } }, priority = ApiService.PRIORITY_HIGH)
     }
 
     fun uploadDocuments() {

@@ -316,6 +316,21 @@
     <string name="enter_shipment_height">Enter shipment height</string>
     <string name="enter_shipment_breadth">Enter shipment breadth</string>
     <string name="enter_a_valid_quantity">Enter a valid quantity</string>
+    <string name="fssai">FSSAI</string>
+    <string name="registration_license_number">Registration/License Number</string>
+    <string name="gst_registration_details">GST Registration Details</string>
+    <string name="msme_registration_details">MSME Registration Details</string>
+    <string name="gst_number">GST Card Number</string>
+    <string name="udhyam_registration_name">Udhyam Registration Name</string>
+    <string name="factiry_licence_number">Factory Licence Number</string>
+    <string name="company_details">Company Details <a style="color:#E53935">*</a></string>
+    <string name="company_name">Company Name</string>
+    <string name="authorized_person_aadhar_number">Authorized Person Aadhar Card Number</string>
+    <string name="upload_supporting_file">Upload supporting file</string>
+    <string name="tehsil">Tehsil</string>
+    <string name="bank_account_details">Bank Account Details <a style="color:#E53935">*</a></string>
+    <string name="company">Company</string>
+    <string name="individual">Individual</string>
 
     <array name="user_types">
         <item>Artisan</item>

@@ -20,11 +20,11 @@
             type="DocumentVerificationListener" />
 
         <variable
-            name="cityList"
+            name="stateList"
             type="ArrayList&lt;String&gt;" />
 
         <variable
-            name="tehsilList"
+            name="cityList"
             type="ArrayList&lt;String&gt;" />
     </data>
 
@@ -32,16 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:layout_height="match_parent"
+            android:background="@color/page_bg_color">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/app_logo"
@@ -75,7 +73,6 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/semi_bold"
                     android:gravity="center"
                     android:text="@string/please_enter_following_details"
@@ -87,34 +84,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/forgot_password" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_user_type_card"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/views"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="8dp">
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_txt">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/user_type_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="24dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center">
+                            android:layout_margin="16dp"
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_id_card"
-                                app:tint="@color/brown"
-                                tools:ignore="ContentDescription" />
-
-                            <com.artisan.un.utils.customView.CustomTextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center">
@@ -156,151 +154,20 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/artisan" />
+                                    android:text="@string/individual" />
 
                                 <RadioButton
                                     android:id="@+id/radio_company"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@string/shg" />
+                                    android:text="@string/company" />
 
                             </RadioGroup>
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/input_border_color" />
-
-                    <!--<androidx.cardview.widget.CardView
-                        android:id="@+id/cv_is_sanjeevini_shg"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="24dp"
-                        android:visibility="@{radioCompany.checked?View.VISIBLE:View.GONE, default=gone}"
-                        app:cardCornerRadius="8dp">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/radio_artisan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/artisan" />
-
-                            <RadioButton
-                                android:id="@+id/radio_shg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/shg" />
-
-                        </RadioGroup>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_is_sanjeevini_shg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="8dp">
-
-                                <RadioButton
-                                    android:id="@+id/sanjeevini_shg_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_shg_name"
-                                style="@style/ThemeInputTextLayout"
-                                android:layout_width="0dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="18dp"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginBottom="0dp"
-                                android:hint="@string/shg_name_required"
-                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/sanjeevini_shg">
-
-                                <com.artisan.un.utils.customView.CustomEditText
-                                    android:id="@+id/etSHGName"
-                                    style="@style/ThemeEditText"
-                                    android:layout_width="match_parent"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_shg_gplf"
-                                style="@style/ThemeInputTextLayout"
-                                android:layout_width="0dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginBottom="0dp"
-                                android:hint="@string/shg_gplf_required"
-                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_shg_name">
-
-                                <com.artisan.un.utils.customView.CustomEditText
-                                    android:id="@+id/etSHGGPLGNumber"
-                                    style="@style/ThemeEditText"
-                                    android:layout_width="match_parent"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_shg_mis_code"
-                                style="@style/ThemeInputTextLayout"
-                                android:layout_width="0dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginBottom="0dp"
-                                android:hint="@string/shg_mis_code"
-                                android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_shg_gplf">
-
-                                <com.artisan.un.utils.customView.CustomEditText
-                                    android:id="@+id/etMISCodeNumber"
-                                    style="@style/ThemeEditText"
-                                    android:layout_width="match_parent"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.cardview.widget.CardView>-->
+                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/aadhar_card_container"
@@ -311,16 +178,10 @@
                         app:cardCornerRadius="8dp"
                         tools:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/user_img"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_id_card"
-                            app:layout_constraintBottom_toBottomOf="@id/sanjeevini_shg_txt"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/sanjeevini_shg_txt"
-                            app:tint="@color/brown"
-                            tools:ignore="ContentDescription" />
+                            android:layout_margin="16dp">
 
                             <ImageView
                                 android:id="@+id/id_card_image_1"
@@ -358,19 +219,6 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/aadhar_car_txt" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_shg_name"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="18dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/shg_name_required"
-                            android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/sanjeevini_shg">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_aadhar_number"
@@ -395,27 +243,20 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.aadharNumber}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_shg_gplf"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/shg_gplf_required"
-                            android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_shg_name">
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <com.artisan.un.utils.customView.CustomEditText
-                                android:id="@+id/etSHGGPLGNumber"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:imeOptions="actionNext"
-                                android:inputType="text"
-                                android:singleLine="true" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_aadhar_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_aadhar"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_aadhar_number">
 
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
@@ -426,19 +267,7 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.nameAsPerAadhar}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_shg_mis_code"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/shg_mis_code"
-                            android:visibility="@{sanjeeviniShgYes.checked?View.VISIBLE:View.GONE, default=gone}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_shg_gplf">
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_aadhar_dob_container"
@@ -463,7 +292,7 @@
                                     android:onClick="@{() -> listener.onSelectDateClick(context, DateOfBirthType.AADHAR, inputAadharDob)}"
                                     android:text="@={viewModel.mDocumentsFormModel.dobAsPerAadhar}" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <include
                                 android:id="@+id/aadhar_front_image"
@@ -504,16 +333,10 @@
                         app:cardCornerRadius="8dp"
                         tools:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/heading_img_20"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_id_card"
-                            app:layout_constraintBottom_toBottomOf="@id/title_txt_20"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/title_txt_20"
-                            app:tint="@color/brown"
-                            tools:ignore="ContentDescription" />
+                            android:layout_margin="16dp">
 
                             <ImageView
                                 android:id="@+id/id_card_image_2"
@@ -786,27 +609,20 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.panNumber}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/ifsc_code"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/bank_account_ifsc_code"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/account_holder_name">
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <com.artisan.un.utils.customView.CustomEditText
-                                android:id="@+id/input_ifsc_code"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:imeOptions="actionDone"
-                                android:inputType="textPersonName"
-                                android:singleLine="true"
-                                android:text="@={model.bankISFC}" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_pan_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_pan"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_pan_number">
 
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
@@ -817,18 +633,7 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.nameAsPerPan}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/fssi_code"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/bank_account_ffcc"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ifsc_code">
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_pan_dob_container"
@@ -852,18 +657,7 @@
                                     android:onClick="@{() -> listener.onSelectDateClick(context, DateOfBirthType.PAN, inputPanDob)}"
                                     android:text="@={viewModel.mDocumentsFormModel.dobAsPerPan}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/bank_account_number"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/bank_account_number"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/fssi_code">
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <include
                                 layout="@layout/view_upload_file_layout"
@@ -877,20 +671,9 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/input_pan_dob_container" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/gst_number"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/bank_account_gst"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/bank_account_number">
+                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/gst_details_container"
@@ -901,16 +684,10 @@
                         app:cardCornerRadius="8dp"
                         tools:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/heading_img_1"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_id_card"
-                            app:layout_constraintBottom_toBottomOf="@id/title_txt_1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/title_txt_1"
-                            app:tint="@color/brown"
-                            tools:ignore="ContentDescription" />
+                            android:layout_margin="16dp">
 
                             <ImageView
                                 android:id="@+id/id_card_image_4"
@@ -1061,20 +838,20 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.brnNumber}" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_pan_name"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/name_as_per_pan"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_pan_number">
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/input_brn_name"
+                                style="@style/ThemeInputTextLayout"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:hint="@string/name_as_per_barn_brn"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/input_brn_number">
 
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
@@ -1085,7 +862,7 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.brnName}" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <include
                                 layout="@layout/view_upload_file_layout"
@@ -1099,16 +876,9 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/input_brn_name" />
 
-                            <com.artisan.un.utils.customView.CustomEditText
-                                android:id="@+id/etPanDob"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:focusable="false"
-                                android:inputType="date"
-                                android:onClick="@{(v)->listener.doPickPANBOB()}"
-                                android:text="@={model.panDOB}" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/msme_details_container"
@@ -1119,16 +889,10 @@
                         app:cardCornerRadius="8dp"
                         tools:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/heading_img_2"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_id_card"
-                            app:layout_constraintBottom_toBottomOf="@id/title_txt_2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/title_txt_2"
-                            app:tint="@color/brown"
-                            tools:ignore="ContentDescription" />
+                            android:layout_margin="16dp">
 
                             <ImageView
                                 android:id="@+id/id_card_image_6"
@@ -1540,18 +1304,7 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressLine}" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_brn_name"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/name_as_per_barn_brn"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_brn_number">
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_country_container"
@@ -1574,16 +1327,7 @@
                                     android:focusable="false"
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressCountry}" />
 
-                        <include
-                            layout="@layout/view_upload_file_layout"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:onClick="@{() -> listener.doPickBRN()}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_brn_name"
-                            app:title="@{ model.brnImage==null?@string/brn_image:model.brnImageName }" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_state_container"
@@ -1599,22 +1343,16 @@
                                 app:layout_constraintTop_toBottomOf="@id/input_country_container">
 
                                 <com.artisan.un.utils.customView.CustomAutoCompleteEditText
+                                    android:id="@+id/input_state"
                                     style="@style/ThemeEditText"
                                     android:layout_width="match_parent"
                                     android:cursorVisible="false"
                                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
                                     android:focusable="false"
+                                    app:dropDownMenu="@{stateList}"
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressState}" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_address_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:visibility="gone"
-                    app:cardCornerRadius="8dp"
-                    tools:visibility="visible">
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_city_container"
@@ -1639,50 +1377,7 @@
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressCity}"
                                     app:dropDownMenu="@{cityList}" />
 
-                        <com.artisan.un.utils.customView.CustomTextView
-                            android:id="@+id/tv_title_address_register"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="@string/registered_address"
-                            android:textColor="@color/brown"
-                            android:textSize="@dimen/title_text_size"
-                            app:font_name="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toEndOf="@id/iv_address_register"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/input_tehsil_container"
-                                style="@style/ThemeInputTextLayout"
-                                android:layout_width="0dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginBottom="0dp"
-                                android:hint="@string/tehsil"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_city_container">
-
-                                <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                    android:id="@+id/input_tehsil"
-                                    style="@style/ThemeEditText"
-                                    android:layout_width="match_parent"
-                                    android:cursorVisible="false"
-                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                                    android:focusable="false"
-                                    android:text="@={viewModel.mDocumentsFormModel.registeredAddressTehsil}"
-                                    app:dropDownMenu="@{tehsilList}" />
-
-                            <com.artisan.un.utils.customView.CustomEditText
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:imeOptions="actionNext"
-                                android:inputType="text"
-                                android:singleLine="true"
-                                android:text="@={model.addressRegisterLine1}" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/input_pin"
@@ -1695,7 +1390,7 @@
                                 android:hint="@string/pin"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/input_tehsil_container">
+                                app:layout_constraintTop_toBottomOf="@id/input_city_container">
 
                                 <com.artisan.un.utils.customView.CustomEditText
                                     style="@style/ThemeEditText"
@@ -1706,134 +1401,33 @@
                                     android:singleLine="true"
                                     android:text="@={viewModel.mDocumentsFormModel.registeredAddressPin}" />
 
-                            <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                android:id="@+id/etRegisterCountry"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:cursorVisible="false"
-                                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                                android:focusable="false"
-                                android:text="@={ model.addressRegisterCountry }" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_state"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/state"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_country">
+                    </androidx.cardview.widget.CardView>
 
-                            <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                android:id="@+id/etRegisterState"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:cursorVisible="false"
-                                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                                android:focusable="false"
-                                android:text="@={ model.addressRegisterState }" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_city"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/city"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_state">
-
-                            <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                android:id="@+id/etRegisterCity"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:cursorVisible="false"
-                                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                                android:focusable="false"
-                                android:text="@={ model.addressRegisterCity }"
-                                app:dropDownMenu="@{model.cityArrayRegister}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_tehsil"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/taluk"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_city">
-
-                            <com.artisan.un.utils.customView.CustomAutoCompleteEditText
-                                android:id="@+id/etTehsil"
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:cursorVisible="false"
-                                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down"
-                                android:focusable="false"
-                                android:text="@={ model.addressRegisterTehsil }"
-                                app:dropDownMenu="@{model.tehsilArray}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_pin"
-                            style="@style/ThemeInputTextLayout"
-                            android:layout_width="0dp"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:hint="@string/pin"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/input_tehsil">
-
-                            <com.artisan.un.utils.customView.CustomEditText
-                                style="@style/ThemeEditText"
-                                android:layout_width="match_parent"
-                                android:imeOptions="actionDone"
-                                android:inputType="number"
-                                android:maxLength="6"
-                                android:singleLine="true"
-                                android:text="@={ model.addressRegisterPin }" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <com.artisan.un.utils.customView.CustomButton
                     android:id="@+id/verify_btn"
                     style="@style/ThemeButtonFill"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="24dp"
                     android:onClick="@{() -> listener.onVerifyClick()}"
-                    android:text="@string/verify" />
+                    android:text="@string/verify"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/views" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 

@@ -5,8 +5,6 @@ import com.artisan.un.ui.home.viewModel.*
 import com.artisan.un.ui.order.viewmodel.OrderDetailsViewModel
 import com.artisan.un.ui.product.viewModel.*
 import com.artisan.un.ui.userauth.viewModel.*
-import com.artisan.un.ui.home.myOrder.viewmodel.OrderDetailsViewModel
-import com.artisan.un.ui.home.myOrder.viewmodel.OrderListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

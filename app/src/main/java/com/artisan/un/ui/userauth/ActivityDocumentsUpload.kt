@@ -104,11 +104,11 @@ class ActivityDocumentsUpload : BaseActivity<ActivityDocumentsUploadBinding, Doc
             if(isChecked) handleFormView(Roles.Artisan.ID)
         }
 
-        viewDataBinding.inputCity.doOnTextChanged { text, _, _, _ ->
-            val cityId = mViewModel.mCityDataObservable.value?.firstOrNull { it.name == text?.toString() }?.id
-            viewDataBinding.inputTehsil.text = null
+        viewDataBinding.inputState.doOnTextChanged { inputStateName, _, _, _ ->
+            val stateId = mViewModel.mStateDataObservable.value?.firstOrNull { it.name == inputStateName.toString() }?.id
+            viewDataBinding.inputCity.text = null
 
-            if (cityId != null) mViewModel.getTehsil(cityId)
+            if(stateId != null) mViewModel.getCity(stateId)
         }
     }
 
@@ -117,16 +117,12 @@ class ActivityDocumentsUpload : BaseActivity<ActivityDocumentsUploadBinding, Doc
 
         }
 
-        mViewModel.mStateDataObservable.observe(this) {
-
+        mViewModel.mStateDataObservable.observe(this) { stateData ->
+            viewDataBinding.stateList = stateData.map { it.name ?: "" } as ArrayList<String>
         }
 
         mViewModel.mCityDataObservable.observe(this) { cityData ->
             viewDataBinding.cityList = cityData.map { it.name ?: "" } as ArrayList<String>
-        }
-
-        mViewModel.mTehsilDataObservable.observe(this) { tehsilData ->
-            viewDataBinding.tehsilList = tehsilData.map { it.name ?: "" } as ArrayList<String>
         }
 
         mViewModel.mRequestStatusObservable.observe(this) {
@@ -178,6 +174,7 @@ class ActivityDocumentsUpload : BaseActivity<ActivityDocumentsUploadBinding, Doc
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             mCameraRequestCode -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

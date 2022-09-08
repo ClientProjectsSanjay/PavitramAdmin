@@ -293,3 +293,8 @@ fun Activity.downloadFile(url: String?) {
         downloadManager.enqueue(downloadManagerRequest)
     }
 }
+
+@BindingAdapter(value = ["app:hint", "app:file"], requireAll = true)
+fun CustomTextView.setFileNameAndHint(hint: String?, file: File?) {
+    text = file?.let { file.name } ?: run { hint ?: context.getString(R.string.upload_supporting_file) }
+}

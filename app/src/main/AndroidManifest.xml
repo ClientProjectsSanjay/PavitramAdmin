@@ -46,7 +46,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".ui.home.myOrder.OrderDetailActivity"
+            android:name=".ui.order.ActivityOrderDetails"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

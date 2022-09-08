@@ -47,7 +47,6 @@ data class DocumentsFormDataModel(
     var registeredAddressCountry: String? = null,
     var registeredAddressState: String? = null,
     var registeredAddressCity: String? = null,
-    var registeredAddressTehsil: String? = null,
     var registeredAddressPin: String? = null,
 ) {
 
@@ -161,7 +160,7 @@ data class DocumentsFormDataModel(
     }
 
     fun getRegisteredAddressError(context: Context): String? = run {
-        if (registeredAddressLine.isNullOrEmpty() || registeredAddressCountry.isNullOrEmpty() || registeredAddressState.isNullOrEmpty() || registeredAddressCity.isNullOrEmpty() || registeredAddressTehsil.isNullOrEmpty() || registeredAddressPin.isNullOrEmpty())
+        if (registeredAddressLine.isNullOrEmpty() || registeredAddressCountry.isNullOrEmpty() || registeredAddressState.isNullOrEmpty() || registeredAddressCity.isNullOrEmpty() || registeredAddressPin.isNullOrEmpty())
             context.getString(R.string.registered_address_required)
         else if ((registeredAddressPin?.length ?: 0) < 6)
             context.getString(R.string.enter_valid_pin_number)
@@ -196,7 +195,7 @@ data class DocumentsFormDataModel(
         if(bankIFSC != null) requestMap["ifsc_code"] = bankIFSC.toString().toRequestBody()
         if(registeredAddressLine != null) requestMap["address_line_one_registered"] = registeredAddressLine.toString().toRequestBody()
         if(registeredAddressPin != null) requestMap["pincode_registered"] = registeredAddressPin.toString().toRequestBody()
-
+        requestMap["tehsil_id"] = "0".toRequestBody()
         if(registeredAddressCountry != null) {
             requestMap["country_registered"] = (countryData.value?.find {
                 it.name.equals(registeredAddressCountry, true)
@@ -212,12 +211,6 @@ data class DocumentsFormDataModel(
         if(registeredAddressCity != null) {
             requestMap["district_registered"] = (cityData.value?.find {
                 it.name.equals(registeredAddressCity, true)
-            }?.id ?: 0).toString().toRequestBody()
-        }
-
-        if(registeredAddressTehsil != null) {
-            requestMap["tehsil_id"] = (cityData.value?.find {
-                it.name.equals(registeredAddressTehsil, true)
             }?.id ?: 0).toString().toRequestBody()
         }
 
