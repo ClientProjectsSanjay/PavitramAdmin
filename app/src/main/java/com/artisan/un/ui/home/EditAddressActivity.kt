@@ -10,67 +10,79 @@ import com.artisan.un.ui.common.dialog.CustomAlertDialog
 import com.artisan.un.ui.home.viewModel.EditAddressViewModel
 import com.artisan.un.utils.*
 import com.artisan.un.utils.apis.CityData
+import com.artisan.un.utils.apis.StateData
 import com.artisan.un.utils.apis.TehsilData
 import com.artisan.un.utils.apis.UserAddress
 
 class EditAddressActivity : BaseActivity<ActivityEditAddressBinding, EditAddressViewModel>(R.layout.activity_edit_address, EditAddressViewModel::class), EditAddressListener, AppBarListener {
+    private var selectedState: StateData? = null
     private var selectedCity: CityData? = null
-    private var selectedTehsil: TehsilData? = null
     private var addressData: UserAddress? = null
     private lateinit var savedAddressData: UserAddress
     private val googleMapRequestCode = 1003
-    private var isInitialized = false
 
     override fun onCreate() {
         addressData = ApplicationData.user?.address?.registered?.copy()
-        addressData?.district = null
-        addressData?.tehsil = null
 
         viewDataBinding.listener = this
         viewDataBinding.appBarListener = this
         viewDataBinding.address = addressData
         viewDataBinding.viewModel = mViewModel
 
-        observeData()
         initListener()
+        observeData()
     }
 
     private fun initListener() {
-        viewDataBinding.inputCity.doOnTextChanged { text, _, _, _ ->
-            selectedCity = mViewModel.cityList.value?.find{ it.name.equals(text.toString(), true) }
+        viewDataBinding.inputState.doOnTextChanged { inputStateName, _, _, _ ->
+            mViewModel.stateList.value?.find { it.name.equals(inputStateName.toString(), true) }?.let { state ->
+                if(state.id != addressData?.stateId) {
+                    selectedState = state
+                    addressData?.stateId = state.id
+                    addressData?.state = state.name
+                    addressData?.district = null
+                    addressData?.districtId = null
 
-            if(isInitialized) {
-                addressData?.tehsil = null
-                addressData?.tehsil_id = null
-                viewDataBinding.address = addressData
-            } else {
-                isInitialized = true
+                    viewDataBinding.address = addressData
+                    viewDataBinding.executePendingBindings()
+
+                    mViewModel.getCity(state.id)
+                }
             }
-
-            if(selectedCity != null) mViewModel.getTehsil(selectedCity?.id ?: 0)
         }
 
-        viewDataBinding.inputTahsil.doOnTextChanged { text, _, _, _ ->
-            selectedTehsil = mViewModel.tehsilList.value?.find { it.name.equals(text.toString(), true) }
+        viewDataBinding.inputCity.doOnTextChanged { inputCityName, _, _, _ ->
+            mViewModel.cityList.value?.find { it.name.equals(inputCityName.toString(), true) }?.let { city ->
+                selectedCity = city
+
+                addressData?.district = city.name
+                addressData?.districtId = city.id
+                viewDataBinding.address = addressData
+                viewDataBinding.executePendingBindings()
+            }
         }
     }
 
     private fun observeData() {
-        mViewModel.cityList.observe(this, {
-            it.find { data -> data.id == addressData?.districtId }?.let { city ->
+        mViewModel.stateList.observe(this) { states ->
+            states.find { it.id == addressData?.stateId }?.let { state ->
+                addressData?.state = state.name
+                addressData?.stateId = state.id
+                viewDataBinding.address = addressData
+                viewDataBinding.executePendingBindings()
+            }
+        }
+
+        mViewModel.cityList.observe(this) { cities ->
+            cities.find { it.id == addressData?.districtId }?.let { city ->
                 addressData?.district = city.name
+                addressData?.districtId = city.id
                 viewDataBinding.address = addressData
+                viewDataBinding.executePendingBindings()
             }
-        })
+        }
 
-        mViewModel.tehsilList.observe(this, {
-            it.find { data -> data.id == addressData?.tehsil_id }?.let { tehsil ->
-                addressData?.tehsil = tehsil.name
-                viewDataBinding.address = addressData
-            }
-        })
-
-        mViewModel.requestStatus.observe(this, {
+        mViewModel.requestStatus.observe(this) {
             ApplicationData.user?.address?.registered = addressData
             CustomAlertDialog(
                 context = this,
@@ -78,11 +90,14 @@ class EditAddressActivity : BaseActivity<ActivityEditAddressBinding, EditAddress
                 message = getString(R.string.address_updated_successfully),
                 primaryKey = getString(R.string.ok),
                 primaryKeyAction = {
-                    navigateTo(MainActivity::class.java, arrayListOf(Pair(MENU_TYPE, MenuType.PROFILE.name)))
+                    navigateTo(
+                        MainActivity::class.java,
+                        arrayListOf(Pair(MENU_TYPE, MenuType.PROFILE.name))
+                    )
                     finishAffinity()
                 }
             ).show()
-        })
+        }
     }
 
     override fun onBackClick() = onBackPressed()
@@ -96,7 +111,6 @@ class EditAddressActivity : BaseActivity<ActivityEditAddressBinding, EditAddress
             var tempAddress = ""
             tempAddress += "${address.address_line_one}, "
             tempAddress += "${selectedCity?.name ?: address.district}, "
-            tempAddress += "${selectedTehsil?.name ?: address.tehsil}, "
             tempAddress += "${address.state}, "
             tempAddress += address.country
 
@@ -127,8 +141,6 @@ class EditAddressActivity : BaseActivity<ActivityEditAddressBinding, EditAddress
                         it.countryId = savedAddressData.countryId
                         it.stateId = savedAddressData.stateId
                         it.districtId = selectedCity?.id ?: savedAddressData.districtId
-                        it.tehsil_id = selectedTehsil?.id ?: savedAddressData.tehsil_id
-                        it.tehsil = selectedTehsil?.name ?: savedAddressData.tehsil
                         it.pincode = savedAddressData.pincode
                         it.lat = lat
                         it.log = long
@@ -147,10 +159,9 @@ class EditAddressActivity : BaseActivity<ActivityEditAddressBinding, EditAddress
             address?.pincode.isNullOrEmpty() ||
             address?.country.isNullOrEmpty() ||
             address?.state.isNullOrEmpty() ||
-            address?.district.isNullOrEmpty() ||
-            address?.tehsil.isNullOrEmpty()
+            address?.district.isNullOrEmpty()
         ) getString(R.string.fill_all_the_fields)
-        else if(address?.pincode?.length ?: 0 < 6) getString(R.string.enter_valid_pin_number)
+        else if((address?.pincode?.length ?: 0) < 6) getString(R.string.enter_valid_pin_number)
         else ""
     }
 }

@@ -24,6 +24,9 @@ class HomeViewModel(private val apiService: ApiService) : BaseViewModel() {
     private val _requestStatus = MutableLiveData<Boolean>()
     val requestStatus: LiveData<Boolean> = _requestStatus
 
+    private val mQuantityUpdateLiveData = MutableLiveData<String>()
+    val mQuantityUpdateObservable: LiveData<String> = mQuantityUpdateLiveData
+
     private val _otp = MutableLiveData<OTP>()
     val otp: LiveData<OTP> = _otp
 
@@ -33,7 +36,7 @@ class HomeViewModel(private val apiService: ApiService) : BaseViewModel() {
 
         requestData(
             apiService.getHomeData(map),
-            { _homeData.postValue(it.data) },
+            { response -> response.data?.let { _homeData.postValue(it) } },
             errorPriority = ErrorPriority.LOW
         )
     }
@@ -45,7 +48,7 @@ class HomeViewModel(private val apiService: ApiService) : BaseViewModel() {
 
         requestData(
             apiService.getArtisanProducts(map),
-            { _artisanProducts.postValue(it.data) },
+            { response -> response.data?.let { _artisanProducts.postValue(it) } },
             errorPriority = ErrorPriority.LOW
         )
     }
@@ -76,5 +79,14 @@ class HomeViewModel(private val apiService: ApiService) : BaseViewModel() {
                 priority = ApiService.PRIORITY_HIGH
             )
         }
+    }
+
+    fun updateProductQuantity(productId: Int, quantity: Int) {
+        requestData(
+            api = apiService.updateProductQuantity(productId, quantity),
+            success = { response -> response.message.let { mQuantityUpdateLiveData.postValue(it) } },
+            priority = ApiService.PRIORITY_HIGH,
+            errorPriority = ErrorPriority.MEDIUM,
+        )
     }
 }

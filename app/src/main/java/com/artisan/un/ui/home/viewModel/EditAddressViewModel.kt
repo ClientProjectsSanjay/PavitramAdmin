@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.artisan.un.baseClasses.BaseViewModel
+import com.artisan.un.utils.DEFAULT_COUNTRY_CODE
 import com.artisan.un.utils.DEFAULT_STATE_CODE
 import com.artisan.un.utils.apis.*
 
@@ -11,34 +12,36 @@ class EditAddressViewModel(private val apis: ApiService) : BaseViewModel() {
     private val _requestStatus = MutableLiveData<Boolean>()
     val requestStatus: LiveData<Boolean> = _requestStatus
 
+    private val _stateList = MutableLiveData<ArrayList<StateData>>()
+    val stateList: LiveData<ArrayList<StateData>> = _stateList
+
     private val _cityList = MutableLiveData<ArrayList<CityData>>()
     val cityList: LiveData<ArrayList<CityData>> = _cityList
+
     val cityNameList: LiveData<ArrayList<String>> = Transformations.map(_cityList) { list ->
         ArrayList(list.map { it.name ?: "" }.toList())
     }
 
-    private val _tehsilList = MutableLiveData<ArrayList<TehsilData>>()
-    val tehsilList: LiveData<ArrayList<TehsilData>> = _tehsilList
-    val tehsilNameList: LiveData<ArrayList<String>> = Transformations.map(_tehsilList) { list ->
+    val stateNameList: LiveData<ArrayList<String>> = Transformations.map(_stateList) { list ->
         ArrayList(list.map { it.name ?: "" }.toList())
     }
 
     init {
-        getCity()
+        getState()
     }
 
-    private fun getCity() {
+    private fun getState() {
         val map = HashMap<String, Any>()
-        map["state_id"] = DEFAULT_STATE_CODE
+        map["country_id"] = DEFAULT_COUNTRY_CODE
 
-        requestData(apis.getCity(map), { _cityList.postValue(it.data?.district) })
+        requestData(apis.getState(map), { it.data?.states?.let { states -> _stateList.postValue(states) } })
     }
 
-    fun getTehsil(city_id: Int) {
+    fun getCity(stateId: Int?) {
         val map = HashMap<String, Any>()
-        map["city_id"] = city_id
+        map["state_id"] = stateId ?: 0
 
-        requestData(apis.getTehsil(map), { _tehsilList.postValue(it.data?.tehsil) })
+        requestData(apis.getCity(map), { it.data?.district?.let { districts -> _cityList.postValue(districts) } })
     }
 
     fun requestUpdateAddress(address: UserAddress) {
@@ -50,7 +53,7 @@ class EditAddressViewModel(private val apis: ApiService) : BaseViewModel() {
         map["district"] = address.districtId ?: 0
         map["country"] = address.countryId ?: 0
         map["state"] = address.stateId ?: 0
-        map["tehsil_id"] = address.tehsil_id ?: 0
+        map["tehsil_id"] = 0
         map["address_type"] = "registered"
         map["lat"] = address.lat
         map["log"] = address.log

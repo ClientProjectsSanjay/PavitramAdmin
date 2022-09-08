@@ -8,8 +8,9 @@ import com.artisan.un.baseClasses.BaseRecyclerViewAdapter
 import com.artisan.un.baseClasses.BaseViewHolder
 import com.artisan.un.databinding.ViewListLoadingBinding
 import com.artisan.un.databinding.ViewProductHeadingBinding
+import com.artisan.un.ui.home.viewModel.HomeViewModel
 
-class HomePageAdapter : BaseRecyclerViewAdapter() {
+class HomePageAdapter(val viewModel: HomeViewModel) : BaseRecyclerViewAdapter() {
     private var dataList: ArrayList<CategoryWiseProductModel>? = null
     var isBottomTouched: Boolean = false
 
@@ -43,13 +44,13 @@ class HomePageAdapter : BaseRecyclerViewAdapter() {
 
     override fun getItemCount() = dataList?.let { it.size + if(isBottomTouched) 0 else 1 } ?: 0
 
-    override fun getItemViewType(position: Int) = if(position < dataList?.size ?: 0) 1 else 0
+    override fun getItemViewType(position: Int) = if(position < (dataList?.size ?: 0)) 1 else 0
 
     inner class ProductHeadingHolder(val viewDataBinding : ViewProductHeadingBinding) : BaseViewHolder(viewDataBinding) {
         override fun bindData() {
             dataList?.get(adapterPosition)?.let {
                 val context = viewDataBinding.root.context
-                val adapter = SubCategoryProductAdapter()
+                val adapter = SubCategoryProductAdapter(viewModel)
                 adapter.setData(it.subCategories)
 
                 viewDataBinding.title = it.categoryName

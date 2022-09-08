@@ -298,6 +298,7 @@
     <string name="enter_shipment_length">Enter shipment length</string>
     <string name="enter_shipment_height">Enter shipment height</string>
     <string name="enter_shipment_breadth">Enter shipment breadth</string>
+    <string name="enter_a_valid_quantity">Enter a valid quantity</string>
 
     <array name="user_types">
         <item>Artisan</item>

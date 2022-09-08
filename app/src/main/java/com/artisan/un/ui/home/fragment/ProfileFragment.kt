@@ -73,15 +73,15 @@ class ProfileFragment(private val loginViewModel: LoginViewModel) : BaseFragment
     }
 
     private fun observeData() {
-        loginViewModel.userResponse.observe(requireActivity(), {
+        loginViewModel.userResponse.observe(requireActivity()) {
             userData = it
             setUserData()
             ApplicationData.user = it
-        })
+        }
 
-        mViewModel.requestStatus.observe(requireActivity(), {
+        mViewModel.requestStatus.observe(requireActivity()) {
             loginViewModel.requestUserProfile()
-        })
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

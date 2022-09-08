@@ -137,6 +137,10 @@ interface ApiService {
     fun updateUserProfile(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 
     @FormUrlEncoded
+    @POST("api/update-product-qty")
+    fun updateProductQuantity(@Field("product_id") productId: Int, @Field("qty") quantity: Int): Observable<BaseResponse<Any>>
+
+    @FormUrlEncoded
     @POST("api/updatemobile")
     fun updateMobile(@FieldMap body: HashMap<String, Any>): Observable<BaseResponse<Any>>
 

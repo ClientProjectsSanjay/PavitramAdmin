@@ -15,7 +15,7 @@ import com.artisan.un.utils.navigateTo
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home, HomeViewModel::class), HomePageListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val homeAdapter = HomePageAdapter()
+    private lateinit var homeAdapter: HomePageAdapter
 
     private var totalAvailablePages: Int? = null
     private var isInProgress: Boolean = false
@@ -23,6 +23,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun onCreateView() {
         viewDataBinding.listener = this
+        homeAdapter = HomePageAdapter(mViewModel)
 
         viewDataBinding.viewModel = mViewModel
         linearLayoutManager = LinearLayoutManager(this.context)
@@ -92,6 +93,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             viewDataBinding.message = it.message
             viewDataBinding.isLoading = false
             homeAdapter.resetData()
+        }
+
+        mViewModel.mQuantityUpdateObservable.observe(this) {
+            currentPage = 1
+            requestData(currentPage)
         }
     }
 
