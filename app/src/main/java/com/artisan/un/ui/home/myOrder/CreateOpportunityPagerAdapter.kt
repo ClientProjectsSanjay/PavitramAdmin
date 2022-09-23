@@ -11,9 +11,9 @@ class CreateOpportunityPagerAdapter(fragmentManager: FragmentManager, lifecycle:
     override fun createFragment(position: Int): Fragment = run {
         when(position) {
             0 -> FragmentPending()
-            1 -> FragmentDelivered()
-            2 -> FragmentShipped()
-            3 -> FragmentPicked()
+            1 -> FragmentShipped()
+            2 -> FragmentPicked()
+            3 -> FragmentDelivered()
             else -> Fragment()
         }
     }

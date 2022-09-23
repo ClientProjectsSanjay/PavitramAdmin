@@ -12,7 +12,7 @@ import com.artisan.un.utils.recyclerViewDecoration.AllSideDecoration
 
 class SubCategoryActivity : BaseActivity<ActivitySubCategoryBinding, ProductViewModel>(R.layout.activity_sub_category, ProductViewModel::class), AppBarListener {
     private lateinit var gridLayoutManager: GridLayoutManager
-    private val adapter = SubCategoryProductListAdapter()
+    private lateinit var adapter: SubCategoryProductListAdapter
 
     private var totalAvailablePages: Int? = null
     private var isInProgress: Boolean = false
@@ -25,6 +25,7 @@ class SubCategoryActivity : BaseActivity<ActivitySubCategoryBinding, ProductView
 
         gridLayoutManager = GridLayoutManager(this, 2)
 
+        adapter = SubCategoryProductListAdapter(mViewModel)
         viewDataBinding.recyclerView.layoutManager = gridLayoutManager
         viewDataBinding.recyclerView.adapter = adapter
         viewDataBinding.recyclerView.addItemDecoration(AllSideDecoration())
@@ -63,7 +64,12 @@ class SubCategoryActivity : BaseActivity<ActivitySubCategoryBinding, ProductView
     }
 
     private fun observeData() {
-        mViewModel.products.observe(this, {
+        mViewModel.mQuantityUpdateObservable.observe(this) {
+            currentPage = 1
+            requestData(currentPage)
+        }
+
+        mViewModel.products.observe(this) {
             viewDataBinding.swipeRefresh.isRefreshing = false
             viewDataBinding.isLoading = false
             viewDataBinding.message = null
@@ -71,16 +77,16 @@ class SubCategoryActivity : BaseActivity<ActivitySubCategoryBinding, ProductView
             it.run {
                 isInProgress = false
                 totalAvailablePages = pagination?.last_page
-                if(currentPage == 1) adapter.setData(products, currentPage == totalAvailablePages)
+                if (currentPage == 1) adapter.setData(products, currentPage == totalAvailablePages)
                 else adapter.addData(products, currentPage == totalAvailablePages)
             }
-        })
+        }
 
-        mViewModel.errorMessage.observe(this,  {
+        mViewModel.errorMessage.observe(this) {
             viewDataBinding.swipeRefresh.isRefreshing = false
             viewDataBinding.message = it.message
             viewDataBinding.isLoading = false
-        })
+        }
     }
 
     override fun onBackClick() = onBackPressed()

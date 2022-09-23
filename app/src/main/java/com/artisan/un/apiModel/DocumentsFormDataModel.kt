@@ -135,10 +135,14 @@ data class DocumentsFormDataModel(
         if (isRequired) {
             if (fssaiNumber.isNullOrEmpty() || fssaiImage == null)
                 context.getString(R.string.fssai_information_required)
+            else if((fssaiNumber?.length ?: 0) != 14)
+                context.getString(R.string.invalid_fssai_registeration_number)
             else null
         } else {
-            if (!fssaiNumber.isNullOrEmpty() && fssaiImage != null) null
-            else if (!fssaiNumber.isNullOrEmpty() || fssaiImage != null)
+            if (!fssaiNumber.isNullOrEmpty() && fssaiImage != null) {
+                if((fssaiNumber?.length ?: 0) != 14) context.getString(R.string.invalid_fssai_registeration_number)
+                else null
+            } else if (!fssaiNumber.isNullOrEmpty() || fssaiImage != null)
                 context.getString(R.string.partial_fssai_information_not_allowed)
             else null
         }
@@ -150,9 +154,14 @@ data class DocumentsFormDataModel(
         if(isRequired) {
             if(bankAccountNumber.isNullOrEmpty() || bankAccountName.isNullOrEmpty() || bankIFSC.isNullOrEmpty() || accountProofImage == null)
                 context.getString(R.string.bank_information_required)
+            else if((bankIFSC?.length ?: 0) != 11)
+                context.getString(R.string.invalid_ifsc_code)
             else null
         } else {
-            if(!bankAccountNumber.isNullOrEmpty() && !bankAccountName.isNullOrEmpty() && !bankIFSC.isNullOrEmpty() && accountProofImage != null) null
+            if(!bankAccountNumber.isNullOrEmpty() && !bankAccountName.isNullOrEmpty() && !bankIFSC.isNullOrEmpty() && accountProofImage != null) {
+                if((bankIFSC?.length ?: 0) != 11) context.getString(R.string.invalid_ifsc_code)
+                else null
+            }
             else if(!bankAccountNumber.isNullOrEmpty() || !bankAccountName.isNullOrEmpty() || !bankIFSC.isNullOrEmpty() || accountProofImage != null)
                 context.getString(R.string.partial_bank_information_not_allowed)
             else null

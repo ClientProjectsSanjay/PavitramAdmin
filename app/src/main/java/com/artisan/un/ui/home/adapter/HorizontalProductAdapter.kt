@@ -1,5 +1,6 @@
 package com.artisan.un.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.artisan.un.R
@@ -17,6 +18,7 @@ import com.artisan.un.utils.pxRespectToDeviceWidth
 class HorizontalProductAdapter(val viewModel: HomeViewModel) : BaseRecyclerViewAdapter() {
     private var dataList: ArrayList<ProductData>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(dataList: ArrayList<ProductData>?) {
         this.dataList = dataList
         notifyDataSetChanged()
@@ -41,7 +43,7 @@ class HorizontalProductAdapter(val viewModel: HomeViewModel) : BaseRecyclerViewA
                 viewDataBinding.title = "${product.template?.name} (${product.name})"
                 viewDataBinding.price = product.price.toString()
                 viewDataBinding.isActive = product.is_active == 1
-                viewDataBinding.availableCount = product.qty
+                viewDataBinding.availableCount = product.qty ?: "0"
 
                 viewDataBinding.root.setOnClickListener {
                     context.navigateTo(ProductDescriptionActivity::class.java, arrayListOf(

@@ -2,6 +2,7 @@
     <string name="app_name">Seller Pavitram</string>
     <string name="digits_mobile" translatable="false">0123456789</string>
     <string name="digits_aadhar" translatable="false">0123456789</string>
+    <string name="digits_ifsc" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
     <string name="digits_pan" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
     <string name="digits_name" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
     <string name="digits_bank" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
@@ -51,6 +52,7 @@
     <string name="dob_as_per_aadhar">DOB As Per Aadhar</string>
     <string name="upload_underline"><u>Upload</u></string>
     <string name="pan_card">PAN Card</string>
+    <string name="pan_card_required">PAN Card *</string>
     <string name="bank">Bank</string>
     <string name="bank_account_name">Account Holder Name</string>
     <string name="bank_account_number">Account Number</string>
@@ -220,8 +222,8 @@
     <string name="enter_valid_brn_number">Enter a valid BRN number</string>
     <string name="enter_valid_pin_number">Enter a valid pin number</string>
     <string name="user_type">User Type</string>
-    <string name="artisan">Artisan</string>
-    <string name="shg">SHG</string>
+    <string name="artisan">Individual</string>
+    <string name="shg">Company</string>
     <string name="discart_draft">Discart Draft</string>
     <string name="save_progress_as_draft">Save your progress as draft</string>
     <string name="reason_to_delete_profile">Reason to Delete Profile</string>
@@ -257,8 +259,8 @@
     <string name="new_password_length_error">New password must have at least 8 characters</string>
     <string name="confirm_password_doesnt_match">Confirm password doesn\'t match</string>
     <string name="max_allowed_size_2_mb">The file is too large. Maximum allowed size is 2MB</string>
-    <string name="sanjeevini_shg">Sanjeevini SHG</string>
-    <string name="are_you_a_sanjeevini_shg">Are you a member of Sanjeevini\'s SHG?</string>
+    <string name="sanjeevini_shg">Sanjeevini Company</string>
+    <string name="are_you_a_sanjeevini_shg">Are you a member of Sanjeevini\'s Company?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="shg_name">SHG Name</string>
@@ -319,6 +321,7 @@
     <string name="fssai">FSSAI</string>
     <string name="registration_license_number">Registration/License Number</string>
     <string name="gst_registration_details">GST Registration Details</string>
+    <string name="gst_registration_details_required">GST Registration Details *</string>
     <string name="msme_registration_details">MSME Registration Details</string>
     <string name="gst_number">GST Card Number</string>
     <string name="udhyam_registration_name">Udhyam Registration Name</string>
@@ -331,6 +334,11 @@
     <string name="bank_account_details">Bank Account Details <a style="color:#E53935">*</a></string>
     <string name="company">Company</string>
     <string name="individual">Individual</string>
+    <string name="file_not_available">File not available</string>
+    <string name="authorized_person_name">Authorized Person Name</string>
+    <string name="cin_number_partnership_registration_number">CIN Number/Partnership Registration Number</string>
+    <string name="invalid_ifsc_code">Invalid IFSC Code</string>
+    <string name="invalid_fssai_registeration_number">Invalid FSSAI registration number</string>
 
     <array name="user_types">
         <item>Artisan</item>

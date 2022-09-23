@@ -29,7 +29,7 @@ class ActivitySearchProduct : BaseActivity<ActivitySearchProductBinding, Product
         viewDataBinding.appBarListener = this
 
         gridLayoutManager = GridLayoutManager(this, 2)
-        productListAdapter = SubCategoryProductListAdapter()
+        productListAdapter = SubCategoryProductListAdapter(mViewModel)
 
         viewDataBinding.recyclerView.layoutManager = gridLayoutManager
         viewDataBinding.recyclerView.adapter = productListAdapter
@@ -82,13 +82,18 @@ class ActivitySearchProduct : BaseActivity<ActivitySearchProductBinding, Product
     }
 
     private fun observeData() {
+        mViewModel.mQuantityUpdateObservable.observe(this) {
+            currentPage = 1
+            requestData(viewDataBinding.inputSearch.text.toString(), currentPage)
+        }
+
         mViewModel.searchProduct.observe(this) {
             viewDataBinding.isLoading = false
             it.products?.let { productPage ->
                 if (productPage.data != null && productPage.last_page != null) {
                     viewDataBinding.isLoading = false
 
-                    if (productPage.data?.size ?: 0 == 0) {
+                    if ((productPage.data?.size ?: 0) == 0) {
                         viewDataBinding.message = getString(R.string.no_data_found)
                         productListAdapter.setData(null)
                     } else {

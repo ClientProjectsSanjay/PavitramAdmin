@@ -291,7 +291,7 @@ fun Activity.downloadFile(url: String?) {
         )
         downloadManagerRequest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         downloadManager.enqueue(downloadManagerRequest)
-    }
+    } ?: Toast.makeText(this, getString(R.string.file_not_available), Toast.LENGTH_SHORT).show()
 }
 
 @BindingAdapter(value = ["app:hint", "app:file"], requireAll = true)

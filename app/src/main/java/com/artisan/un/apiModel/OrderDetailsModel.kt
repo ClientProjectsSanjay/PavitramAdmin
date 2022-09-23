@@ -43,6 +43,7 @@ data class OrderDetailsSellerData(
 }
 
 data class OrderDetailsOrderData(
+    val orderPdfPath: String?,
     val orderStatus: String,
     val paymentStatus: String,
     val deliveryDate: String,
@@ -51,7 +52,11 @@ data class OrderDetailsOrderData(
     val productItem: ArrayList<OrderDetailsProductItem>,
 ) {
     fun getFormattedStatus(): String {
-        return orderStatus[0].toUpperCase() + orderStatus.substring(1)
+        return orderStatus[0].uppercaseChar() + orderStatus.substring(1)
+    }
+
+    fun getFormattedPaymentStatus(): String {
+        return paymentStatus[0].uppercaseChar() + paymentStatus.substring(1)
     }
 
     fun getTotal(): String {

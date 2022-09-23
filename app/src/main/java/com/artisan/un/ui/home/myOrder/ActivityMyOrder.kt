@@ -25,9 +25,9 @@ class ActivityMyOrder : Fragment() {
         TabLayoutMediator(mDataBinding.tabLayout, mDataBinding.viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> getString(R.string.pending)
-                1 -> getString(R.string.delivered)
-                2 -> getString(R.string.shipped)
-                else -> getString(R.string.picked)
+                1 -> getString(R.string.shipped)
+                2 -> getString(R.string.picked)
+                else -> getString(R.string.delivered)
             }
         }.attach()
     }

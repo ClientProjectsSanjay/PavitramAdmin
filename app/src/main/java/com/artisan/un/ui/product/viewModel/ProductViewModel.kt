@@ -16,6 +16,9 @@ class ProductViewModel(private val apiService: ApiService) : BaseViewModel() {
     private val _searchProduct = MutableLiveData<SearchProductModel>()
     val searchProduct: LiveData<SearchProductModel> = _searchProduct
 
+    private val mQuantityUpdateLiveData = MutableLiveData<String>()
+    val mQuantityUpdateObservable: LiveData<String> = mQuantityUpdateLiveData
+
     fun requestSubCategoryProductList(subCategoryId: Int?, page: Int) {
         val map = HashMap<String, Any>()
         map["artisanshgid"] = ApplicationData.user?.user?.id ?: ""
@@ -24,7 +27,7 @@ class ProductViewModel(private val apiService: ApiService) : BaseViewModel() {
 
         requestData(
             apiService.getSubCategoryProducts(map),
-            { _products.postValue(it.data) },
+            { _products.postValue(it.data!!) },
             errorPriority = ErrorPriority.LOW,
         )
     }
@@ -34,6 +37,15 @@ class ProductViewModel(private val apiService: ApiService) : BaseViewModel() {
         map["keyword"] = key
         map["page"] = page
 
-        requestData(apiService.searchProduct(map), { _searchProduct.postValue(it.data) })
+        requestData(apiService.searchProduct(map), { _searchProduct.postValue(it.data!!) })
+    }
+
+    fun updateProductQuantity(productId: Int, quantity: Int) {
+        requestData(
+            api = apiService.updateProductQuantity(productId, quantity),
+            success = { response -> response.message.let { mQuantityUpdateLiveData.postValue(it) } },
+            priority = ApiService.PRIORITY_HIGH,
+            errorPriority = ErrorPriority.MEDIUM,
+        )
     }
 }
