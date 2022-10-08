@@ -165,7 +165,7 @@
     <string name="delete_profile_message">Are you sure you want to delete profile? All your data will be deleted</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="save_changes">Save Changes</string>
-    <string name="your_shg_name">Your Name/SHG Name</string>
+    <string name="your_shg_name">Your Name/Company Name</string>
     <string name="change_mobile_no">Change Mobile No.</string>
     <string name="address">Address</string>
     <string name="change_address">Change Address</string>
@@ -263,15 +263,15 @@
     <string name="are_you_a_sanjeevini_shg">Are you a member of Sanjeevini\'s Company?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="shg_name">SHG Name</string>
-    <string name="shg_name_required">SHG Name *</string>
-    <string name="shg_gplf">SHG GPLF</string>
-    <string name="shg_gplf_required">SHG GPLF *</string>
-    <string name="shg_mis_code">SHG MIS Code</string>
-    <string name="please_select_if_sanjeevini_shg_or_not">Please select if you are a Sanjeevini SHG or not?</string>
-    <string name="enter_valid_sanjeevini_shg_name">Please enter a valid Sanjeevini SHG name</string>
+    <string name="shg_name">Company Name</string>
+    <string name="shg_name_required">Company Name *</string>
+    <string name="shg_gplf">Company GPLF</string>
+    <string name="shg_gplf_required">Company GPLF *</string>
+    <string name="shg_mis_code">Company MIS Code</string>
+    <string name="please_select_if_sanjeevini_shg_or_not">Please select if you are a Sanjeevini Company or not?</string>
+    <string name="enter_valid_sanjeevini_shg_name">Please enter a valid Sanjeevini Company name</string>
     <string name="enter_valid_sanjeevini_gplf">Please enter a valid Sanjeevini GPLF</string>
-    <string name="shg_details">SHG Details</string>
+    <string name="shg_details">Company Details</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
     <string name="quantity_update">Quantity Update</string>
@@ -319,10 +319,12 @@
     <string name="enter_shipment_breadth">Enter shipment breadth</string>
     <string name="enter_a_valid_quantity">Enter a valid quantity</string>
     <string name="fssai">FSSAI</string>
+    <string name="fssai_required">FSSAI *</string>
     <string name="registration_license_number">Registration/License Number</string>
     <string name="gst_registration_details">GST Registration Details</string>
     <string name="gst_registration_details_required">GST Registration Details *</string>
     <string name="msme_registration_details">MSME Registration Details</string>
+    <string name="msme_registration_details_required">MSME Registration Details *</string>
     <string name="gst_number">GST Card Number</string>
     <string name="udhyam_registration_name">Udhyam Registration Name</string>
     <string name="factiry_licence_number">Factory Licence Number</string>
@@ -341,8 +343,8 @@
     <string name="invalid_fssai_registeration_number">Invalid FSSAI registration number</string>
 
     <array name="user_types">
-        <item>Artisan</item>
-        <item>SHG</item>
+        <item>Individual</item>
+        <item>Company</item>
     </array>
 
     <array name="sizeArray">
